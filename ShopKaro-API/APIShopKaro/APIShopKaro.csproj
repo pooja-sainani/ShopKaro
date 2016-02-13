@@ -230,27 +230,54 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CART.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CATEGORy.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\database_firewall_rules.cs">
-      <DependentUpon>TestModel.tt</DependentUpon>
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModelCFH.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModelCFH.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModelCFH.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModelCFH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModelCFH.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\TestModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestModel.Context.tt</DependentUpon>
+    <Compile Include="Models\ORDER.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TestModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestModel.tt</DependentUpon>
+    <Compile Include="Models\ORDERPRODUCT.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TestModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestModel.edmx</DependentUpon>
+    <Compile Include="Models\PRODUCT.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserInfo.cs">
-      <DependentUpon>TestModel.tt</DependentUpon>
+    <Compile Include="Models\REVIEW.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ROLE.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SERVICE.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SERVICEORDER.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
+      <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -264,15 +291,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\TestModel.Context.tt">
+    <Content Include="Models\DataModelCFH.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TestModel.edmx</DependentUpon>
-      <LastGenOutput>TestModel.Context.cs</LastGenOutput>
+      <DependentUpon>DataModelCFH.edmx</DependentUpon>
+      <LastGenOutput>DataModelCFH.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\TestModel.tt">
+    <Content Include="Models\DataModelCFH.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TestModel.edmx</DependentUpon>
-      <LastGenOutput>TestModel.cs</LastGenOutput>
+      <DependentUpon>DataModelCFH.edmx</DependentUpon>
+      <LastGenOutput>DataModelCFH.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.21.5-build00175.js" />
     <Content Include="Scripts\ai.0.21.5-build00175.min.js" />
@@ -300,13 +327,14 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\TestModel.edmx">
+    <EntityDeploy Include="Models\DataModelCFH.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TestModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataModelCFH.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\TestModel.edmx.diagram">
-      <DependentUpon>TestModel.edmx</DependentUpon>
+    <Content Include="Models\DataModelCFH.edmx.diagram">
+      <DependentUpon>DataModelCFH.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\ShopKaroApi.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
