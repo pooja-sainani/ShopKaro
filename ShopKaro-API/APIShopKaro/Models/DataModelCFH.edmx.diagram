@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47d31b6a332943ac9a8471a995e329d9" Name="Diagram1">
+        <EntityTypeShape EntityType="apsteamCFHModel.CART" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.CATEGORy" Width="1.5" PointX="8" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.ORDERPRODUCT" Width="1.5" PointX="7.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.ORDER" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.PRODUCT" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.REVIEW" Width="1.5" PointX="12.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.ROLE" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.SERVICEORDER" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.SERVICE" Width="1.5" PointX="10.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.USER" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.database_firewall_rules" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="apsteamCFHModel.FK__CART__BUYERID__46B27FE2" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__CART__PRODUCTID__45BE5BA9" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__PRODUCTS__CATEGO__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__SERVICES__CATEGO__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__ORDERPROD__ORDER__540C7B00" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__ORDERPROD__PRODU__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__ORDERS__BUYERID__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__PRODUCTS__SELLER__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__REVIEWS__PRODUCT__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__REVIEWS__REVIEWE__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__REVIEWS__SERVICE__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__USERS__ROLEID__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__SERVICEOR__BUYER__5CA1C101" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__SERVICEOR__SERVI__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="apsteamCFHModel.FK__SERVICES__SELLER__06CD04F7" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
