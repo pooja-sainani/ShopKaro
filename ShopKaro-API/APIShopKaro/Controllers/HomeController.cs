@@ -31,16 +31,16 @@ namespace APIShopKaro.Controllers
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("api/Login")]
        
-        [ResponseType(typeof(UserInfo))]
+        [ResponseType(typeof(USER))]
         
         public IHttpActionResult Login()
         {
-            UserInfo ui = null;
+           USER ui = null;
             try
             {
-                APIShopKaro.Models.TempCFHEntities db = new APIShopKaro.Models.TempCFHEntities();
+                APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities();
                 ui=  
-                   (from userinfo in db.UserInfoes where userinfo.UserId == 1234 select userinfo)
+                   (from userinfo in db.USERS  select userinfo)
                        .ToList()[0];
             }
             catch (Exception e)
