@@ -24,8 +24,8 @@ namespace APIShopKaro.Models
             this.SERVICES = new HashSet<SERVICE>();
         }
     
-        public System.Guid ID { get; set; }
-        public int ROLEID { get; set; }
+        public System.Guid? ID { get; set; }
+        public int? ROLEID { get; set; }
         public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
         public string NAME { get; set; }

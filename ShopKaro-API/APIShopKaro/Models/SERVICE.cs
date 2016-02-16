@@ -20,10 +20,10 @@ namespace APIShopKaro.Models
             this.SERVICEORDERs = new HashSet<SERVICEORDER>();
         }
     
-        public System.Guid ID { get; set; }
-        public System.Guid CATEGORYID { get; set; }
+        public System.Guid? ID { get; set; }
+        public System.Guid? CATEGORYID { get; set; }
         public string NAME { get; set; }
-        public System.Guid SELLERID { get; set; }
+        public System.Guid? SELLERID { get; set; }
         public Nullable<bool> ISACTIVE { get; set; }
         public string DETAILS { get; set; }
         public string TAG1 { get; set; }
@@ -33,7 +33,7 @@ namespace APIShopKaro.Models
         public string CITY { get; set; }
         public string STATE { get; set; }
         public int PINCODE { get; set; }
-        public decimal PRICE { get; set; }
+        public decimal? PRICE { get; set; }
     
         public virtual CATEGORy CATEGORy { get; set; }
         public virtual ICollection<REVIEW> REVIEWS { get; set; }

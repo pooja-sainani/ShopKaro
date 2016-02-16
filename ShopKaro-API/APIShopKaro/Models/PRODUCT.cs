@@ -21,11 +21,11 @@ namespace APIShopKaro.Models
             this.REVIEWS = new HashSet<REVIEW>();
         }
     
-        public System.Guid ID { get; set; }
-        public System.Guid CATEGORYID { get; set; }
+        public System.Guid? ID { get; set; }
+        public System.Guid? CATEGORYID { get; set; }
         public string NAME { get; set; }
-        public decimal PRICE { get; set; }
-        public System.Guid SELLERID { get; set; }
+        public decimal? PRICE { get; set; }
+        public System.Guid? SELLERID { get; set; }
         public string DETAILS { get; set; }
         public string TAG1 { get; set; }
         public string TAG2 { get; set; }
