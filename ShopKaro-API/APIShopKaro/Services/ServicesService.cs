@@ -24,7 +24,7 @@ namespace APIShopKaro.Services
                 // check if all required fields are present
                 if ((!service.CATEGORYID.HasValue || service.CATEGORYID.Value == Guid.Empty) || service.NAME == null ||
                     !service.PRICE.HasValue || (!service.SELLERID.HasValue || service.SELLERID.Value == Guid.Empty))
-                    throw new ArgumentException("Service", "Some mandatory parameters required to add a new service are missing");
+                    throw new ArgumentException("Some mandatory parameters required to add a new service are missing", "Service");
 
                 if (!service.ID.HasValue || service.ID.Value == Guid.Empty)
                     service.ID = Guid.NewGuid();

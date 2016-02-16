@@ -14,7 +14,7 @@ namespace APIShopKaro.Models
     
     public partial class REVIEW
     {
-        public System.Guid ID { get; set; }
+        public System.Guid? ID { get; set; }
         public Nullable<System.Guid> PRODUCTID { get; set; }
         public Nullable<System.Guid> SERVICEID { get; set; }
         public Nullable<System.Guid> REVIEWERID { get; set; }

@@ -47,8 +47,8 @@ namespace APIShopKaro.Controllers
             try
             {
                 var userService = new UserService();
-                var id = userService.EditUserDetails(user);
-                var response = Request.CreateResponse(HttpStatusCode.OK, id);
+                var success = userService.EditUserDetails(user);
+                var response = Request.CreateResponse(HttpStatusCode.OK, success);
                 return response;
             }
             catch (Exception e)

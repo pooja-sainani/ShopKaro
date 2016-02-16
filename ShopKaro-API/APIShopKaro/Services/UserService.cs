@@ -31,11 +31,11 @@ namespace APIShopKaro.Services
                     throw new ArgumentNullException("User", "User can not be null");
 
                 if(user.ROLEID == (int)UserRoles.Admin)
-                    throw new ArgumentException("User", "Admins can not be added using this service ");
+                    throw new ArgumentException("Admins can not be added using this service", "User");
 
                 // check if all required fields are present
                 if (user.USERNAME == null || user.PASSWORD == null || user.NAME == null || user.GENDER == null || user.CONTACTNUMBER == null)
-                    throw new ArgumentException("User", "Some mandatory parameters required to add a new user are missing");
+                    throw new ArgumentException("Some mandatory parameters required to add a new user are missing", "User");
 
                 // by default, all users are buyers
                 if (!user.ROLEID.HasValue) user.ROLEID = (int)UserRoles.Buyer;
@@ -43,7 +43,7 @@ namespace APIShopKaro.Services
                 // check if all additional required fields for seller are present
                 if (user.ROLEID == (int)UserRoles.Seller && 
                     (user.EMAILID == null || user.PLACE == null || user.CITY == null || user.STATE == null || user.PINCODE == null))
-                    throw new ArgumentException("User", "Some additional mandatory parameters required to add a new seller are missing");
+                    throw new ArgumentException("Some additional mandatory parameters required to add a new seller are missing", "User");
 
                 if (!user.ID.HasValue || user.ID.Value == Guid.Empty)
                     user.ID = Guid.NewGuid();
@@ -97,9 +97,9 @@ namespace APIShopKaro.Services
                                              select u).Single();
 
                         if (user.ROLEID != null && existingUser.ROLEID != user.ROLEID)
-                            throw new ArgumentException("ROLEID can not be changed using this service");
+                            throw new ArgumentException("ROLEID can not be changed using this EditUserDetails service");
                         if(user.USERNAME != null && existingUser.USERNAME != user.USERNAME)
-                            throw new ArgumentException("ROLEID can never be modified");
+                            throw new ArgumentException("USERNAME can never be modified");
 
                         if (user.NAME != null) existingUser.NAME = user.NAME;
                         if (user.PASSWORD != null) existingUser.PASSWORD = user.PASSWORD;

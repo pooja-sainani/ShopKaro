@@ -20,9 +20,9 @@ namespace APIShopKaro.Models
             this.SERVICES = new HashSet<SERVICE>();
         }
     
-        public System.Guid ID { get; set; }
+        public System.Guid? ID { get; set; }
         public string NAME { get; set; }
-        public bool SERVICE { get; set; }
+        public bool? SERVICE { get; set; }
     
         public virtual ICollection<PRODUCT> PRODUCTS { get; set; }
         public virtual ICollection<SERVICE> SERVICES { get; set; }
