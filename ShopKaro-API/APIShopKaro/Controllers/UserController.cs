@@ -36,6 +36,29 @@ namespace APIShopKaro.Controllers
         }
 
         /// <summary>
+        /// Get user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("GetUserById")]
+        public HttpResponseMessage GetUserById(Guid? id)
+        {
+            try
+            {
+                var userService = new UserService();
+                var user = userService.GetUserById(id);
+                var response = Request.CreateResponse(HttpStatusCode.OK, user);
+                return response;
+            }
+            catch (Exception e)
+            {
+                var error = Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return error;
+            }
+        }
+
+        /// <summary>
         /// Edit buyer/ seller profile details
         /// </summary>
         /// <param name="user"></param>

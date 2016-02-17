@@ -53,7 +53,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.USERS.Add(user);
-                        db.SaveChanges();
+                        db.SaveChangesAsync();
                     }
                     catch(System.Data.DataException e)
                     {
@@ -68,6 +68,48 @@ namespace APIShopKaro.Services
                 return user.ID.Value;
             }
             catch(Exception e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public USER GetUserById(Guid? id)
+        {
+            try
+            {
+                if (!id.HasValue || id.Value == Guid.Empty)
+                    throw new ArgumentNullException("ID", "ID can not be null");
+
+                USER user;
+
+                using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
+                {
+                    try
+                    {
+                        var pr = from p in db.USERS
+                                 where p.ID == id
+                                 select p;
+                        if (pr.Count() != 1)
+                            return null;
+                        user = pr.Single();
+                    }
+                    catch (System.Data.DataException e)
+                    {
+                        throw new Exception(e.InnerException.InnerException.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                }
+                return user;
+            }
+            catch (Exception e)
             {
                 throw;
             }
@@ -110,7 +152,8 @@ namespace APIShopKaro.Services
                         if (user.STATE != null) existingUser.STATE = user.STATE;
                         if (user.PINCODE != null) existingUser.PINCODE = user.PINCODE;
 
-                        db.SaveChanges();
+                        db.SaveChangesAsync();
+                        return true;
                     }
 
                     catch (System.Data.DataException e)
@@ -121,9 +164,7 @@ namespace APIShopKaro.Services
                     {
                         throw;
                     }
-                }
-
-                return true;
+                }                
             }
             catch (Exception e)
             {

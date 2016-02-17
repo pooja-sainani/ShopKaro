@@ -34,7 +34,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.SERVICES.Add(service);
-                        db.SaveChanges();
+                        db.SaveChangesAsync();
                     }
                     catch (System.Data.DataException e)
                     {
@@ -115,7 +115,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         var pr = from p in db.SERVICES
-                                 where p.CATEGORYID == id
+                                 where p.ID == id
                                  select p;
                         if (pr.Count() != 1)
                             return null;
@@ -131,6 +131,45 @@ namespace APIShopKaro.Services
                     }
                 }
                 return service;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// delete service
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DeleteService(Guid? id)
+        {
+            try
+            {
+                if (!id.HasValue || id.Value == Guid.Empty)
+                    throw new ArgumentNullException("ID", "ID can not be null");
+
+                using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
+                {
+                    try
+                    {
+                        var service = (from s in db.SERVICES
+                                         where s.ID == id
+                                            select s).Single();
+                        db.SERVICES.Remove(service);
+                        db.SaveChangesAsync();
+                        return true;
+                    }
+                    catch (System.Data.DataException e)
+                    {
+                        throw new Exception(e.InnerException.InnerException.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                }
             }
             catch (Exception e)
             {

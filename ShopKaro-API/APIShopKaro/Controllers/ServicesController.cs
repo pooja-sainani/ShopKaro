@@ -80,5 +80,28 @@ namespace APIShopKaro.Controllers
                 return error;
             }
         }
+
+        /// <summary>
+        /// Delete Service
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("DeleteService")]
+        public HttpResponseMessage DeleteService(Guid? id)
+        {
+            try
+            {
+                var servicesService = new ServicessService();
+                var service = servicesService.DeleteService(id);
+                var response = Request.CreateResponse(HttpStatusCode.OK, service);
+                return response;
+            }
+            catch (Exception e)
+            {
+                var error = Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return error;
+            }
+        }
     }
 }

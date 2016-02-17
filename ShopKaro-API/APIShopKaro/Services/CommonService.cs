@@ -118,7 +118,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.REVIEWS.Add(userReview);
-                        db.SaveChanges();
+                        db.SaveChangesAsync();
                     }
                     catch (System.Data.DataException e)
                     {

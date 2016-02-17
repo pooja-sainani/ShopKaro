@@ -34,7 +34,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.PRODUCTS.Add(product);
-                        db.SaveChanges();
+                        db.SaveChangesAsync();
                     }
                     catch (System.Data.DataException e)
                     {
@@ -114,7 +114,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         var pr = from p in db.PRODUCTS
-                                 where p.CATEGORYID == id
+                                 where p.ID == id
                                  select p;
                         if (pr.Count() != 1)
                             return null;
@@ -130,6 +130,45 @@ namespace APIShopKaro.Services
                     }
                 }
                 return product;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// delete product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DeleteProduct(Guid? id)
+        {
+            try
+            {
+                if (!id.HasValue || id.Value == Guid.Empty)
+                    throw new ArgumentNullException("ID", "ID can not be null");
+
+                using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
+                {
+                    try
+                    {
+                        var product = (from s in db.PRODUCTS
+                                       where s.ID == id
+                                       select s).Single();
+                        db.PRODUCTS.Remove(product);
+                        db.SaveChangesAsync();
+                        return true;
+                    }
+                    catch (System.Data.DataException e)
+                    {
+                        throw new Exception(e.InnerException.InnerException.Message);
+                    }
+                    catch (Exception e)
+                    {
+                        throw;
+                    }
+                }
             }
             catch (Exception e)
             {
