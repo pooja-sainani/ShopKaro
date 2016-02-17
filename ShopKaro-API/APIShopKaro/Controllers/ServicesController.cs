@@ -34,5 +34,51 @@ namespace APIShopKaro.Controllers
                 return error;
             }
         }
+
+        /// <summary>
+        /// Get all services for a category
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("GetAllServicesByCategory")]
+        public HttpResponseMessage GetAllServicesByCategory(Guid? categoryId)
+        {
+            try
+            {
+                var servicesService = new ServicessService();
+                var services = servicesService.GetAllServicesByCategory(categoryId);
+                var response = Request.CreateResponse(HttpStatusCode.OK, services);
+                return response;
+            }
+            catch (Exception e)
+            {
+                var error = Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return error;
+            }
+        }
+
+        /// <summary>
+        /// Get service by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("GetServiceById")]
+        public HttpResponseMessage GetServiceById(Guid? id)
+        {
+            try
+            {
+                var servicesService = new ServicessService();
+                var service = servicesService.GetServiceById(id);
+                var response = Request.CreateResponse(HttpStatusCode.OK, service);
+                return response;
+            }
+            catch (Exception e)
+            {
+                var error = Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return error;
+            }
+        }
     }
 }
