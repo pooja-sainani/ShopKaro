@@ -41,7 +41,7 @@ namespace APIShopKaro.Controllers
         /// <param name="categoryId"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("GetAllServicesByCategory")]
+        [Route("GetAllServicesByCategory/{categoryId}")]
         public HttpResponseMessage GetAllServicesByCategory(Guid? categoryId)
         {
             try
@@ -64,7 +64,7 @@ namespace APIShopKaro.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("GetServiceById")]
+        [Route("GetServiceById/{id}")]
         public HttpResponseMessage GetServiceById(Guid? id)
         {
             try
@@ -87,7 +87,7 @@ namespace APIShopKaro.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("DeleteService")]
+        [Route("DeleteService/{id}")]
         public HttpResponseMessage DeleteService(Guid? id)
         {
             try

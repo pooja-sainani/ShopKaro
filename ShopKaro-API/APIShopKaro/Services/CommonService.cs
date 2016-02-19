@@ -32,15 +32,11 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.CATEGORIES.Add(category);
-                        db.SaveChanges();
+                        db.SaveChangesAsync();
                     }
                     catch (System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
                     }
                 }
 
@@ -75,9 +71,8 @@ namespace APIShopKaro.Services
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
                     }
-                    catch (Exception e)
+                    catch(ArgumentNullException e)
                     {
-                        throw;
                     }
                 }
                 return categories;
@@ -123,10 +118,6 @@ namespace APIShopKaro.Services
                     catch (System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
                     }
                 }
                 return userReview.ID.Value;

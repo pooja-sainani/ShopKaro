@@ -40,10 +40,6 @@ namespace APIShopKaro.Services
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
                     }
-                    catch (Exception e)
-                    {
-                        throw;
-                    }
                 }
 
                 return service.ID.Value;
@@ -72,19 +68,16 @@ namespace APIShopKaro.Services
                 {
                     try
                     {
-                        var pr = from p in db.SERVICES
+                        services = (from p in db.SERVICES
                                  where p.CATEGORYID == categoryId
-                                 select p;
-                        if (services.Count() > 0)
-                            services = pr.ToList();
+                                 select p).ToList();
                     }
                     catch (System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
                     }
-                    catch (Exception e)
-                    {
-                        throw;
+                    catch (ArgumentNullException e)
+                    {                        
                     }
                 }
 
@@ -114,20 +107,21 @@ namespace APIShopKaro.Services
                 {
                     try
                     {
-                        var pr = from p in db.SERVICES
+                        service = (from p in db.SERVICES
                                  where p.ID == id
-                                 select p;
-                        if (pr.Count() != 1)
-                            return null;
-                        service = pr.Single();
+                                 select p).Single();
                     }
                     catch (System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
                     }
-                    catch (Exception e)
+                    catch (ArgumentNullException e)
                     {
-                        throw;
+                        service = null; // no such service
+                    }
+                    catch(InvalidOperationException e)
+                    {
+                        service = null;
                     }
                 }
                 return service;
@@ -164,10 +158,6 @@ namespace APIShopKaro.Services
                     catch (System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
                     }
                 }
             }

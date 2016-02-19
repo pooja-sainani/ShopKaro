@@ -58,11 +58,7 @@ namespace APIShopKaro.Services
                     catch(System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
-                    }     
-                    catch(Exception e)
-                    {
-                        throw;
-                    }             
+                    }              
                 }
                     
                 return user.ID.Value;
@@ -91,22 +87,24 @@ namespace APIShopKaro.Services
                 {
                     try
                     {
-                        var pr = from p in db.USERS
+                        user = (from p in db.USERS
                                  where p.ID == id
-                                 select p;
-                        if (pr.Count() != 1)
-                            return null;
-                        user = pr.Single();
+                                 select p).Single();
                     }
                     catch (System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
                     }
-                    catch (Exception e)
+                    catch(ArgumentNullException e)
                     {
-                        throw;
+                        user = null;    // user not availble 
+                    }
+                    catch(InvalidOperationException e)
+                    {
+                        user = null;    // multiple users available with same id
                     }
                 }
+
                 return user;
             }
             catch (Exception e)
@@ -155,14 +153,9 @@ namespace APIShopKaro.Services
                         db.SaveChangesAsync();
                         return true;
                     }
-
                     catch (System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
-                    }
-                    catch (Exception e)
-                    {
-                        throw;
                     }
                 }                
             }

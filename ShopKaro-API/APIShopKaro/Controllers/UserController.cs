@@ -41,7 +41,7 @@ namespace APIShopKaro.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("GetUserById")]
+        [Route("GetUserById/{id}")]
         public HttpResponseMessage GetUserById(Guid? id)
         {
             try

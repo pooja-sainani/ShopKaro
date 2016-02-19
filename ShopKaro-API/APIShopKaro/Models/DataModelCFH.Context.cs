@@ -18,6 +18,7 @@ namespace APIShopKaro.Models
         public apsteamCFHEntities()
             : base("name=apsteamCFHEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

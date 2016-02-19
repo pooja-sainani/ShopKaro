@@ -41,7 +41,7 @@ namespace APIShopKaro.Controllers
         /// <param name="isService"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("GetAllCategories")]
+        [Route("GetAllCategories/{isService}")]
         public HttpResponseMessage GetAllCategories(bool isService)
         {
             try
