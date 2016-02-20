@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_id": "shopkaro-1faec",
+    "project_number": "893999244979",
+    "name": "ShopKaro"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893999244979:android:cc86988722dfe8a2",
+        "client_id": "android:cfh.com.shopkaro",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "cfh.com.shopkaro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893999244979-hh8vuacj16415bh5tn890t9eumaba9jd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cfh.com.shopkaro",
+            "certificate_hash": "6E7AEF2821ABB186CA81592191CCAB6E5B1BBE46"
+          }
+        },
+        {
+          "client_id": "893999244979-hmgj147j6ju2t4grk0a9alhes810jbg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
