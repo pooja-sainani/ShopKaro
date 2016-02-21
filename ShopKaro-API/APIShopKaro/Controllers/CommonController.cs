@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using APIShopKaro.Models;
 using APIShopKaro.Services;
+using System.Web.Http.Description;
 
 namespace APIShopKaro.Controllers
 {
@@ -44,7 +45,7 @@ namespace APIShopKaro.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetAllCategories/{isService}")]
-
+        [ResponseType(typeof(List<CATEGORy>))]
 
         public HttpResponseMessage GetAllCategories(bool isService)
         {

@@ -118,7 +118,7 @@ namespace APIShopKaro.Services
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public USER GetUserById(String email)
+        public USER GetUserById(String email,String password)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         user = (from p in db.USERS
-                                where p.EMAILID == email
+                                where p.EMAILID == email && p.PASSWORD == password
                                 select p).Single();
                     }
                     catch (System.Data.DataException e)

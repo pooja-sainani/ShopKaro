@@ -74,9 +74,9 @@ namespace APIShopKaro.Controllers
             try
             {
                 var userService = new UserService();
-                var user = userService.GetUserById(UserEmail);
+                var user = userService.GetUserById(UserEmail,UserPassword);
                 
-                if (user != null && user.PASSWORD.Equals(UserPassword))
+                if (user != null)
                 {
                     var response = Request.CreateResponse(HttpStatusCode.OK, user);
                     return response;
