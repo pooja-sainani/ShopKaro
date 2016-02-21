@@ -10,6 +10,8 @@ using APIShopKaro.Services;
 namespace APIShopKaro.Controllers
 {
     [RoutePrefix("api")]
+
+   // [System.Web.Http.RoutePrefix("api")]
     public class CommonController : ApiController
     {
         /// <summary>
@@ -40,8 +42,10 @@ namespace APIShopKaro.Controllers
         /// </summary>
         /// <param name="isService"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("GetAllCategories/{isService}")]
+
+
         public HttpResponseMessage GetAllCategories(bool isService)
         {
             try

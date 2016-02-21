@@ -114,6 +114,50 @@ namespace APIShopKaro.Services
         }
 
         /// <summary>
+        /// Get user by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public USER GetUserById(String email)
+        {
+            try
+            {
+                if (email.Equals("")||email==null)
+                    throw new ArgumentNullException("EMAIL", "EMAIL ID can not be null");
+
+                USER user;
+
+                using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
+                {
+                    try
+                    {
+                        user = (from p in db.USERS
+                                where p.EMAILID == email
+                                select p).Single();
+                    }
+                    catch (System.Data.DataException e)
+                    {
+                        throw new Exception(e.InnerException.InnerException.Message);
+                    }
+                    catch (ArgumentNullException e)
+                    {
+                        user = null;    // user not availble 
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        user = null;    // multiple users available with same id
+                    }
+                }
+
+                return user;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Edit buyer/ seller profile details
         /// </summary>
         /// <param name="user"></param>
