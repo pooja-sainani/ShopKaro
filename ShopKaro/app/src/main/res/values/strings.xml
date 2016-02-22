@@ -65,4 +65,17 @@
          from https://console.developers.google.com/ -->
     <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
 
+    <string-array name="category_array" id="@+id/category">
+        <item>Home made Food</item>
+        <item>Clothes</item>
+        <item>Handicrafts</item>
+        <item>Handbags and Wallets</item>
+        <item>Jewellery</item>
+        <item>Personal Care</item>
+        <item>Household</item>
+        <item>Painting</item>
+
+    </string-array>
+
+
 </resources>
