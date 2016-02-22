@@ -2,6 +2,7 @@ package cfh.com.shopkaro;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.net.Uri;
 import android.content.ComponentName;
 import android.content.Context;
@@ -151,7 +152,13 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.nav_History) {
+        } else if(id == R.id.nav_sell_service){
+            Intent intent = new Intent(this, SellServiceActivity.class);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else if (id == R.id.nav_History) {
 
         } else if (id == R.id.nav_my_profile) {
 

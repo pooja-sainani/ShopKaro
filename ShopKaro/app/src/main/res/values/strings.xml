@@ -22,7 +22,6 @@
     <string name="action_settings">Settings</string>
 
 
-
     <!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="signed_in">Signed in</string>
@@ -76,6 +75,19 @@
         <item>Painting</item>
 
     </string-array>
+
+    <string-array name="service_categories" id="@+id/service_category">
+        <item>Tuitions</item>
+        <item>Fitness classes</item>
+        <item>Babysitting</item>
+        <item>Art classes</item>
+        <item>Dance classes</item>
+        <item>Music classes</item>
+        <item>Tailoring</item>
+        <item>Cooking</item>
+    </string-array>
+
+    <string name="add_service">Add service</string>
 
     <string name="SearchHint">Search</string>
 
