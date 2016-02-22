@@ -7,6 +7,8 @@ using System.Web.Http;
 using APIShopKaro.Models;
 using APIShopKaro.Services;
 
+using System.Web.Http.Description;
+
 namespace APIShopKaro.Controllers
 {
     [RoutePrefix("api/Users")]
@@ -42,6 +44,7 @@ namespace APIShopKaro.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("GetUserById/{id}")]
+
         public HttpResponseMessage GetUserById(Guid? id)
         {
             try
@@ -58,6 +61,38 @@ namespace APIShopKaro.Controllers
             }
         }
 
+        /// <summary>
+        /// Get user by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("GetUserLogin")]
+        [ResponseType(typeof(USER))]
+        public HttpResponseMessage GetUserLogin(String UserEmail , String UserPassword)
+        {
+            try
+            {
+                var userService = new UserService();
+                var user = userService.GetUserById(UserEmail,UserPassword);
+                
+                if (user != null)
+                {
+                    var response = Request.CreateResponse(HttpStatusCode.OK, user);
+                    return response;
+                }
+                var error = Request.CreateResponse(HttpStatusCode.Unauthorized,"user doesn't exists");
+                return error;
+              
+
+            
+            }
+            catch (Exception e)
+            {
+                var error = Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return error;
+            }
+        }
         /// <summary>
         /// Edit buyer/ seller profile details
         /// </summary>
