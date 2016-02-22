@@ -6,10 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using APIShopKaro.Models;
 using APIShopKaro.Services;
+using System.Web.Http.Description;
 
 namespace APIShopKaro.Controllers
 {
     [RoutePrefix("api")]
+
+   // [System.Web.Http.RoutePrefix("api")]
     public class CommonController : ApiController
     {
         /// <summary>
@@ -40,8 +43,10 @@ namespace APIShopKaro.Controllers
         /// </summary>
         /// <param name="isService"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("GetAllCategories/{isService}")]
+        [ResponseType(typeof(List<CATEGORy>))]
+
         public HttpResponseMessage GetAllCategories(bool isService)
         {
             try
