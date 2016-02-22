@@ -22,7 +22,6 @@
     <string name="action_settings">Settings</string>
 
 
-
     <!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="signed_in">Signed in</string>
@@ -76,6 +75,8 @@
         <item>Painting</item>
 
     </string-array>
+
+    <string name="SearchHint">Search</string>
 
 
 </resources>
