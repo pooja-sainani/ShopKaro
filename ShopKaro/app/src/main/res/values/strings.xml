@@ -90,6 +90,7 @@
     <string name="add_service">Add service</string>
 
     <string name="SearchHint">Search</string>
+    <string name="title_activity_sell_new">SellNewActivity</string>
 
 
 </resources>

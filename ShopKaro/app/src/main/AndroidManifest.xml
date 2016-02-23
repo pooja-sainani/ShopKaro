@@ -57,7 +57,10 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".SellServiceActivity"></activity>
+        <activity
+            android:name=".SellNewActivity"
+            android:label="@string/title_activity_sell_new"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
