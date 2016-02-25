@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_marginTop="60dp"
     tools:context=".SellProductFragment">
 
     <ScrollView
@@ -22,32 +23,41 @@
 
 
             <EditText
-                android:id="@+id/service_name"
+                android:id="@+id/product_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLines="2"
                 android:singleLine="false"
                 android:maxLength="30"
-                android:hint="Service name"/>
+                android:hint="Product name"/>
 
             <Spinner
-                android:id="@+id/static_service_category_spinner"
+                android:id="@+id/static_product_category_spinner"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp" />
 
             <EditText
-                android:id="@+id/service_price"
+                android:id="@+id/product_price"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="numberDecimal"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:hint="Service price"/>
+                android:hint="Product price"/>
 
             <EditText
-                android:id="@+id/service_details"
+                android:id="@+id/product_quantiy_available"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:hint="Product quantity"/>
+
+            <EditText
+                android:id="@+id/product_details"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textMultiLine"
@@ -57,27 +67,17 @@
                 android:hint="Details"/>
 
             <EditText
-                android:id="@+id/service_tag1"
+                android:id="@+id/product_tag1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:maxLength="200"
                 android:singleLine="true"
-                android:hint="Add tag to decribe your service"/>
+                android:hint="Add tag to decribe your product"/>
 
             <EditText
-                android:id="@+id/service_tag2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textMultiLine"
-                android:maxLines="5"
-                android:maxLength="200"
-                android:singleLine="true"
-                android:hint="Add another tag..."/>
-
-            <EditText
-                android:id="@+id/service_tag3"
+                android:id="@+id/product_tag2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textMultiLine"
@@ -87,42 +87,27 @@
                 android:hint="Add another tag..."/>
 
             <EditText
-                android:id="@+id/service_place"
+                android:id="@+id/product_tag3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:maxLines="1"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:maxLength="200"
                 android:singleLine="true"
-                android:hint="Location"/>
+                android:hint="Add another tag..."/>
 
             <EditText
-                android:id="@+id/service_city"
+                android:id="@+id/product_quantiy_threshold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="number"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:hint="City"/>
-
-            <EditText
-                android:id="@+id/service_state"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:hint="State"/>
-
-            <EditText
-                android:id="@+id/service_pincode"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="numberSigned"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:hint="Pincode"/>
-
+                android:hint="Threshold quantity"/>
 
             <Button
-                android:id="@+id/add_service_button"
-                android:text="@string/add_service"
+                android:id="@+id/add_product_button"
+                android:text="@string/add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

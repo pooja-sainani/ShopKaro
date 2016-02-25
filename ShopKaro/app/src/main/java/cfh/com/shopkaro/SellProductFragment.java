@@ -24,12 +24,12 @@ public class SellProductFragment extends Fragment {
     public View  onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState){
         view = inflater.inflate(R.layout.sell_product_fragment, container, false);
-        Spinner staticSpinner = (Spinner) view.findViewById(R.id.static_service_category_spinner);
+        Spinner staticSpinner = (Spinner) view.findViewById(R.id.static_product_category_spinner);
         ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
-                .createFromResource(this.getActivity(), R.array.service_categories, android.R.layout.simple_spinner_item);
+                .createFromResource(this.getActivity(), R.array.product_categories, android.R.layout.simple_spinner_item);
         staticSpinner.setAdapter(staticAdapter);
 
-        Button addServiceButton = (Button) view.findViewById(R.id.add_service_button);
+        Button addServiceButton = (Button) view.findViewById(R.id.add_product_button);
         addServiceButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 new addNewServicePostTask().execute();

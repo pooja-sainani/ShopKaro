@@ -34,7 +34,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.PRODUCTS.Add(product);
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                     }
                     catch (System.Data.DataException e)
                     {
