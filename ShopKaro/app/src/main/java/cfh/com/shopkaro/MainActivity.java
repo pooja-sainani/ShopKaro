@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+
         return true;
     }
 
@@ -194,6 +195,11 @@ public class MainActivity extends AppCompatActivity
                 Uri.parse("android-app://cfh.com.shopkaro/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
     }
 
     @Override
