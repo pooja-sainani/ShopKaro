@@ -32,7 +32,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.CATEGORIES.Add(category);
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                     }
                     catch (System.Data.DataException e)
                     {
@@ -113,7 +113,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.REVIEWS.Add(userReview);
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                     }
                     catch (System.Data.DataException e)
                     {

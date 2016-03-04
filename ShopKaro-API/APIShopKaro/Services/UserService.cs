@@ -53,7 +53,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.USERS.Add(user);
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                     }
                     catch(System.Data.DataException e)
                     {
@@ -194,7 +194,7 @@ namespace APIShopKaro.Services
                         if (user.STATE != null) existingUser.STATE = user.STATE;
                         if (user.PINCODE != null) existingUser.PINCODE = user.PINCODE;
 
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                         return true;
                     }
                     catch (System.Data.DataException e)
