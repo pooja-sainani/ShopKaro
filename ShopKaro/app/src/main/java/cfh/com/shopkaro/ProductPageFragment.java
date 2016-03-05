@@ -3,6 +3,7 @@ package cfh.com.shopkaro;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -97,6 +98,7 @@ public class ProductPageFragment extends Fragment {
             new ProductTask().execute();
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -269,25 +271,34 @@ private class ProductTask extends AsyncTask<String, Integer, String> {
 
             try {
                 // Add your data
-
+                SharedPreferences sp = getContext().getSharedPreferences("LoginSaved", Context.MODE_PRIVATE);
+                String email = sp.getString("userid", null);
                     Log.e("ASHU","abcdf");
                     System.out.println("HELLO1");
                   //  String img_Str = params[0];
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
                     nameValuePairs.add(new BasicNameValuePair("PRODUCTID", Id));
                     nameValuePairs.add(new BasicNameValuePair("Quantity", "1"));
-                    nameValuePairs.add(new BasicNameValuePair("BUYERID", "A5396330-31CB-43FB-B98C-E6E8CDE97F0C"));
+                    nameValuePairs.add(new BasicNameValuePair("BUYERID", email));
 
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
-
+                HttpEntity entity = response.getEntity();
+                Log.e("ASHU","AFTERENTITY");
+                InputStream content = entity.getContent();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+                return builder.toString();
             } catch (ClientProtocolException e) {
                 // TODO Auto-generated catch block
             } catch (IOException e) {
                 // TODO Auto-generated catch block
             }
-            return "OK";
+return "ok";
         }
 
 
@@ -300,6 +311,7 @@ private class ProductTask extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            Log.e("Result after adding",result);
             pDialog.dismiss();
             // dismissProgressBar();
 		      /*try {

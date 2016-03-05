@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ourlogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -65,6 +65,22 @@
             android:name=".BaseMenuActivitiy"
             android:label="@string/title_activity_base_menu_activitiy"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+           
+        <activity
+            android:name=".LastPage"
+            android:label="@string/title_activity_last_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".SplashScreenActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

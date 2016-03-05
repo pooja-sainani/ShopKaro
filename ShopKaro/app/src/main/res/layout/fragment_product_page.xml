@@ -32,7 +32,7 @@
             android:maxHeight="120dp"
             android:maxWidth="120dp"
             android:scaleType="fitXY"
-            android:src="@drawable/purse"></ImageView>
+            android:src="@drawable/drawericon"></ImageView>
 
         <ImageButton
             android:id="@+id/ButtonAddToCart"
@@ -42,8 +42,9 @@
             android:layout_margin="5dip"
             android:clickable="true"
             android:layout_marginRight="80dp"
-            android:background="@drawable/purse"
-            android:text="Add to Cart"></ImageButton>
+            android:background="@drawable/addtocart"
+            android:text="Add to Cart"
+            android:elevation="5dp"></ImageButton>
 
 
         <TextView
@@ -100,7 +101,7 @@
 
                 <TextView
                     android:id="@+id/TitleProductTags"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
                     android:layout_weight="0.05"
@@ -109,7 +110,7 @@
 
                 <TextView
                     android:id="@+id/TextViewProductTags"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
                     android:layout_weight="0.05"
@@ -125,7 +126,7 @@
 
                 <TextView
                     android:id="@+id/TitleProductDetails"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
                     android:layout_weight="0.05"
@@ -135,7 +136,7 @@
 
                 <TextView
                     android:id="@+id/TextViewProductDetails"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dip"
                     android:layout_weight="0.05"

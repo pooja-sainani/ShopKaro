@@ -25,13 +25,14 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import cfh.com.shopkaro.dummy.CartContent;
 import cfh.com.shopkaro.dummy.CategoriesContent;
 import cfh.com.shopkaro.dummy.ProductContent;
 
 //import android.support.v4.app.Fragment;
 
 public class MainActivity extends BaseMenuActivitiy
-        implements ProductPageFragment.OnFragmentInteractionListener, productFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener {
+        implements ProductPageFragment.OnFragmentInteractionListener, productFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener {
 
 
     /**
@@ -54,6 +55,16 @@ public class MainActivity extends BaseMenuActivitiy
     }
 
     @Override
+    public void onListFragmentInteraction(CartContent.CartItem item) {
+//        Fragment fragment = new ProductPageFragment();
+//        Bundle args = new Bundle();
+//        args.putString("ProductId", item.id);
+//        fragment.setArguments(args);
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+    @Override
     public void onListFragmentInteraction(CategoriesContent.DummyItem item) {
         Fragment fragment = new productFragment();
         Bundle args = new Bundle();
@@ -70,10 +81,10 @@ public class MainActivity extends BaseMenuActivitiy
 
         getLayoutInflater().inflate(R.layout.activity_main, subActivityLayout);
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
+    // ATTENTION: This was auto-generated to implement the App Indexing API.
+    // See https://g.co/AppIndexing/AndroidStudio for more information.
+    client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+}
 
     @Override
     public void onBackPressed() {
