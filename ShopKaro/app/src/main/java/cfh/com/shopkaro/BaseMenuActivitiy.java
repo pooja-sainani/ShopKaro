@@ -133,11 +133,7 @@ public class BaseMenuActivitiy extends AppCompatActivity implements NavigationVi
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         }
-        else if (id == R.id.nav_History) {
 
-        } else if (id == R.id.nav_my_profile) {
-
-        }
         return true;
     }
 
