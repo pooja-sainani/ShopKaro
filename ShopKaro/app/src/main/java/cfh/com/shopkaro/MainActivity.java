@@ -32,7 +32,7 @@ import cfh.com.shopkaro.dummy.ProductContent;
 //import android.support.v4.app.Fragment;
 
 public class MainActivity extends BaseMenuActivitiy
-        implements ProductPageFragment.OnFragmentInteractionListener, productFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener {
+        implements     ProductPageFragment.OnFragmentInteractionListener, productFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener {
 
 
     /**

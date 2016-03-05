@@ -19,8 +19,6 @@ public class SellNewActivity extends BaseMenuActivitiy {
         Log.d("Activity", "Sell");
 
         getLayoutInflater().inflate(R.layout.activity_sell_new, subActivityLayout);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         int fragmentId = getIntent().getExtras().getInt("fragment");
         Fragment fragment;
