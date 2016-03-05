@@ -1,25 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home"/>
+
         <item
             android:id="@+id/nav_products"
             android:icon="@drawable/householditems"
             android:title="Products" />
+
         <item
             android:id="@+id/nav_services"
             android:icon="@drawable/handicrafts"
             android:title="Services" />
-        <item
-            android:id="@+id/nav_History"
-            android:icon="@drawable/history"
-            android:title="History" />
-        <item
-            android:id="@+id/nav_my_profile"
-            android:icon="@drawable/user"
-            android:title="My Profile" />
 
-    </group>
+        <item
+            android:id="@+id/nav_sell_service"
+            android:icon="@drawable/sellservice"
+            android:title="Sell a service" />
+
+        <item
+            android:id="@+id/nav_sell_product"
+            android:icon="@drawable/sellproduct"
+            android:title="Sell a product" />
+        <item
+            android:id="@+id/nav_offered_by_me"
+            android:icon="@drawable/myoffers"
+            android:title="Offered by me" />
+
+        <item
+            android:id="@+id/nav_cart"
+            android:icon="@drawable/cart"
+            android:title="My Cart"/>
+        <item
+            android:id="@+id/nav_my_orders"
+            android:icon="@drawable/order"
+            android:title="My Orders" />
+
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/userprofile"
+            android:title="My Account"/>
+
+        <item
+            android:id="@+id/nav_password"
+            android:icon="@drawable/changepwd"
+            android:title="Change Password"/>
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Logout"/>
+
+
 
 
 

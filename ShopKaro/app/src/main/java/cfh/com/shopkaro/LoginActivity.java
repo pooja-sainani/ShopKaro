@@ -5,9 +5,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -53,6 +55,21 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -66,6 +83,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
+    public TextView signupLink;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -107,6 +125,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "cfh.com.shopkaro",
@@ -168,6 +190,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // loginButton.setFragment(this);
         // Other app specific specialization
 
+
+        signupLink = (TextView)findViewById(R.id.link_signup);
+        signupLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View rootView) {
+                Intent signupIntent = new Intent(getApplicationContext(), SignupActivity.class);
+                startActivity(signupIntent);
+
+            }
+        });
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -461,10 +493,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            Intent intent = new Intent(this, MainActivity.class);
+           // Intent intent = new Intent(this, MainActivity.class);
 
 
-            startActivity(intent);
+           // startActivity(intent);
         }
     }
 
@@ -586,71 +618,124 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
     }
-}
 
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
 
+   private class UserLoginTask extends AsyncTask<Void, Void, String> {
 
+        public UserLoginTask mAuthTask = null;
+        private EditText mPasswordView;
+        private final String mEmail;
+        private final String mPassword;
 
-
-/**
- * Represents an asynchronous login/registration task used to authenticate
- * the user.
- */
-
- class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-    public UserLoginTask mAuthTask = null;
-    private EditText mPasswordView;
-    private final String mEmail;
-    private final String mPassword;
-
-    UserLoginTask(String email, String password) {
-        mEmail = email;
-        mPassword = password;
-    }
-
-    @Override
-    protected Boolean doInBackground(Void... params) {
-        // TODO: attempt authentication against a network service.
-
-        try {
-            // Simulate network access.
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            return false;
+        UserLoginTask(String email, String password) {
+            mEmail = email;
+            mPassword = password;
         }
 
-        for (String credential :LoginActivity.DUMMY_CREDENTIALS) {
-            String[] pieces = credential.split(":");
-            if (pieces[0].equals(mEmail)) {
-                // Account exists, return true if the password matches.
-                return pieces[1].equals(mPassword);
+        @Override
+        protected String doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            try {
+                // Simulate network access.
+                StringBuilder builder = new StringBuilder();
+
+
+                //System.out.println("HELLO");
+                // Create a new HttpClient and Post Header
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://shopkaroapi.azurewebsites.net/api/Users/GetUserLogin");
+
+                try {
+                    // Add your data
+
+                    Log.e("ASHU", "abcdf");
+                    System.out.println("HELLO1");
+                    //  String img_Str = params[0];
+                    //  List< List<NameValuePair>> test = new ArrayList<>();
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                    nameValuePairs.add(new BasicNameValuePair("EMAILID", mEmail));
+
+                    nameValuePairs.add(new BasicNameValuePair("PASSWORD", mPassword));
+
+
+                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    // Execute HTTP Post Request
+                    HttpResponse response = httpclient.execute(httppost);
+                    HttpEntity entity = response.getEntity();
+                    Log.e("ASHU", "AFTERENTITY");
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+                    return builder.toString();
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    return "ok";
+                }
+            }
+            catch (IOException e) {
+                // TODO Auto-generated catch block
+                return "ok";
+            }
+
+
+
+
+
+            // TODO: register the new account here.
+
+        }
+
+        @Override
+        protected void onPostExecute(final String success) {
+            mAuthTask = null;
+            //  showProgress(false);
+            Log.e("Result After Login",success);
+            if (!success.equals("ok")) {
+                //finish();
+                try {
+                    JSONObject jobj = (JSONObject) new JSONObject(success);
+                    SharedPreferences sp = getBaseContext().getSharedPreferences("LoginSaved", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("username",mEmail);
+                    editor.putString("userid",jobj.getString("ID"));
+                    editor.putString("password",mPassword);
+                    editor.commit();
+                    Log.e("After Login",sp.getString("userid",null));
+                    Intent signupIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(signupIntent);
+                }catch (Exception e){
+
+                }
+
+
+            } else {
+                mPasswordView.setError("This password is incorrect");
+                mPasswordView.requestFocus();
             }
         }
 
-        // TODO: register the new account here.
-        return true;
-    }
-
-    @Override
-    protected void onPostExecute(final Boolean success) {
-        mAuthTask = null;
-      //  showProgress(false);
-
-        if (success) {
-            //finish();
-
-        } else {
-            mPasswordView.setError("This password is incorrect");
-            mPasswordView.requestFocus();
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            // showProgress(false);
         }
     }
 
-    @Override
-    protected void onCancelled() {
-         mAuthTask = null;
-        // showProgress(false);
-    }
+
 }
+
+
+
+
+
+
 
 

@@ -70,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:elevation="5dp"/>
 
 
             <Space
@@ -142,7 +143,29 @@
 
             </RelativeLayout>
 
+            <Space
+                android:layout_width="1dp"
+                android:layout_height="30dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                
+                <TextView android:id="@+id/link_signup"
+                    android:layout_width="fill_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginLeft="60dp"
+                    android:text="Not a member? Signup here"
+                    android:gravity="center"
+                    android:textSize="16dip"/>
+
+
+            </LinearLayout>
+
         </LinearLayout>
+
 
     </ScrollView>
 </LinearLayout>

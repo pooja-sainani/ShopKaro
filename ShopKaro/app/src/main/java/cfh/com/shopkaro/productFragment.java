@@ -200,6 +200,7 @@ public class productFragment extends Fragment {
                     ProductContent.ITEMS.add(item);
                 }
                 recyclerView.setAdapter(new MyproductRecyclerViewAdapter(ProductContent.ITEMS, mListener));
+
                 //list.setAdapter(adapter);
             } catch (JSONException e) {
                 // TODO Auto-generated catch block

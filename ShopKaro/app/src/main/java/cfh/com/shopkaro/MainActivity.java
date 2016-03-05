@@ -2,14 +2,14 @@ package cfh.com.shopkaro;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.net.Uri;
-import android.content.ComponentName;
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,19 +19,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.app.SearchManager;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import cfh.com.shopkaro.dummy.CartContent;
 import cfh.com.shopkaro.dummy.CategoriesContent;
 import cfh.com.shopkaro.dummy.ProductContent;
 
 //import android.support.v4.app.Fragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, productFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,ProductPageFragment.OnFragmentInteractionListener, productFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener {
 
 
     /**
@@ -40,10 +40,30 @@ public class MainActivity extends AppCompatActivity
      */
     private GoogleApiClient client;
 
+//    public void onFragmentInteraction(Uri uri){
+//
+//    }
+    @Override
     public void onListFragmentInteraction(ProductContent.DummyItem item) {
-
+        Fragment fragment = new ProductPageFragment();
+        Bundle args = new Bundle();
+        args.putString("ProductId", item.id);
+        fragment.setArguments(args);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
+    @Override
+    public void onListFragmentInteraction(CartContent.CartItem item) {
+//        Fragment fragment = new ProductPageFragment();
+//        Bundle args = new Bundle();
+//        args.putString("ProductId", item.id);
+//        fragment.setArguments(args);
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+    @Override
     public void onListFragmentInteraction(CategoriesContent.DummyItem item) {
         Fragment fragment = new productFragment();
         Bundle args = new Bundle();
@@ -151,11 +171,24 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.nav_History) {
-
-        } else if (id == R.id.nav_my_profile) {
-
+        } else if (id == R.id.nav_cart) {
+            Fragment fragment = new MyCartFragment();
+            Bundle args = new Bundle();
+            args.putBoolean("CategoryName", true);
+            fragment.setArguments(args);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
+        else if(id == R.id.nav_sell_service || id == R.id.nav_sell_product){
+            Intent intent = new Intent(this, SellNewActivity.class);
+            intent.putExtra("fragment", id);
+            startActivity(intent);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+
 
         return true;
     }
@@ -198,5 +231,10 @@ public class MainActivity extends AppCompatActivity
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
