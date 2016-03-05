@@ -22,6 +22,7 @@
     <string name="action_settings">Settings</string>
 
 
+
     <!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="signed_in">Signed in</string>
@@ -87,9 +88,24 @@
         <item>Cooking</item>
     </string-array>
 
+    <string-array name="product_categories" id="@+id/product_category">
+        <item>Handicrafts</item>
+        <item>Jewellery</item>
+        <item>Homemade sweets</item>
+        <item>Candles</item>
+        <item>Cakes</item>
+        <item>Cookies</item>
+        <item>Soaps</item>
+        <item>Snacks</item>
+        <item>Showpieces</item>
+    </string-array>
+
     <string name="add_service">Add service</string>
+    <string name="add_product">Add product</string>
 
     <string name="SearchHint">Search</string>
+    
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_sell_new">SellNewActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->

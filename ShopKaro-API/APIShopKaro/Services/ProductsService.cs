@@ -34,7 +34,7 @@ namespace APIShopKaro.Services
                     try
                     {
                         db.PRODUCTS.Add(product);
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                     }
                     catch (System.Data.DataException e)
                     {
@@ -151,7 +151,7 @@ namespace APIShopKaro.Services
                                        where s.ID == id
                                        select s).Single();
                         db.PRODUCTS.Remove(product);
-                        db.SaveChangesAsync();
+                        db.SaveChanges();
                         return true;
                     }
                     catch (System.Data.DataException e)
