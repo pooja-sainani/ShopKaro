@@ -60,6 +60,10 @@
         <activity
             android:name=".SellNewActivity"
             android:label="@string/title_activity_sell_new"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BaseMenuActivitiy"
+            android:label="@string/title_activity_base_menu_activitiy"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -7,14 +7,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 
-public class SellNewActivity extends AppCompatActivity {
+public class SellNewActivity extends BaseMenuActivitiy {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sell_new);
+        Log.d("Activity", "Sell");
+
+        getLayoutInflater().inflate(R.layout.activity_sell_new, subActivityLayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -29,5 +33,16 @@ public class SellNewActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.sell_content_frame, fragment).commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
 
 }

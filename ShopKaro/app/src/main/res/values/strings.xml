@@ -107,6 +107,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_base_menu">BaseMenuActivity</string>
+    <string name="title_activity_base_menu_activitiy">BaseMenuActivitiy</string>
 
 
 </resources>
