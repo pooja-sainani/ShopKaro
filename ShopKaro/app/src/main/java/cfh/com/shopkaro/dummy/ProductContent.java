@@ -59,13 +59,15 @@ public class ProductContent {
         public final Double cost;
         public final String tags;
         public final String place;
+        public final boolean isService;
 
-        public DummyItem(String id, String name,Double cost ,String details,String place) {
+        public DummyItem(String id, String name,Double cost ,String details,String place, boolean isService) {
             this.id = id;
             this.name = name;
             this.cost = cost;
             this.tags = details;
             this.place = place;
+            this.isService = isService;
         }
 
         @Override

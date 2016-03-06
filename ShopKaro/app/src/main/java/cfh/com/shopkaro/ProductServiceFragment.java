@@ -204,10 +204,10 @@ public class ProductServiceFragment extends Fragment {
                     jobj=(JSONObject) json.get(i);
                     ProductContent.DummyItem item;
                     if(!isservice) {
-                         item = new ProductContent.DummyItem(jobj.getString("ID"), jobj.getString("NAME"), jobj.getDouble("PRICE"), jobj.getString("TAG1") + " " + jobj.getString("TAG2") + " " + jobj.getString("TAG3"),"");
+                         item = new ProductContent.DummyItem(jobj.getString("ID"), jobj.getString("NAME"), jobj.getDouble("PRICE"), jobj.getString("TAG1") + " " + jobj.getString("TAG2") + " " + jobj.getString("TAG3"),"", false);
                     }
                     else{
-                        item = new ProductContent.DummyItem(jobj.getString("ID"), jobj.getString("NAME"), jobj.getDouble("PRICE"), jobj.getString("TAG1") + " " + jobj.getString("TAG2") + " " + jobj.getString("TAG3"),jobj.getString("PLACE"));
+                        item = new ProductContent.DummyItem(jobj.getString("ID"), jobj.getString("NAME"), jobj.getDouble("PRICE"), jobj.getString("TAG1") + " " + jobj.getString("TAG2") + " " + jobj.getString("TAG3"),jobj.getString("PLACE"), true);
                     }
 
                     ProductContent.ITEMS.add(item);

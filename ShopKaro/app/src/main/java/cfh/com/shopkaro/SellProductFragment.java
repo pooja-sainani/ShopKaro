@@ -1,6 +1,8 @@
 package cfh.com.shopkaro;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -28,6 +30,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,6 +45,10 @@ public class SellProductFragment extends Fragment{
 
     }
 
+    private List<String > productCategoryIds = Arrays.asList("51989DDB-9888-41E1-8410-028A207AA0BA",
+            "1E39BAC2-2E8D-4C79-A9F7-0E15D989D7F8", "4DCC7972-1D1E-4FE1-8D02-204D0B1A899D", "411204AA-1277-4997-8E65-2F763099E05C",
+            "2284C49E-B628-4138-BF96-3D1B4D0B3806", "A0211A31-753F-471C-BF62-85BE714C2087", "C8A269B2-84BB-4964-A623-A311551E8EF9",
+            "497A31E4-A6AF-4B9F-8D1E-CAB21EA6E842", "95C6D4CC-21D8-4E1F-8EE7-E1138C1DD07A");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,8 +71,9 @@ public class SellProductFragment extends Fragment{
                 Product product = new Product();
                 String temp = ((EditText)view.findViewById(R.id.product_name)).getText().toString();
                 if(temp != null)    product.NAME = temp;
-                product.CATEGORYID = UUID.fromString("1E39BAC2-2E8D-4C79-A9F7-0E15D989D7F8");
-                product.SELLERID = UUID.fromString("A5396330-31CB-43FB-B98C-E6E8CDE97F0C");
+                Spinner spinner = (Spinner) view.findViewById(R.id.static_product_category_spinner);
+                int selectedCategoryPosition = spinner.getSelectedItemPosition();
+                product.CATEGORYID = productCategoryIds.get(selectedCategoryPosition);
                 temp = ((EditText)view.findViewById(R.id.product_price)).getText().toString();
                 Float tempf =  0.0f;
                 if(!temp.isEmpty())    tempf = Float.parseFloat(temp);
@@ -111,15 +119,17 @@ public class SellProductFragment extends Fragment{
             try{
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost("http://shopkaroapi.azurewebsites.net/api/Products/AddNewProduct");
+                SharedPreferences sp = getContext().getSharedPreferences("LoginSaved", Context.MODE_PRIVATE);
+                String sellerid = sp.getString("userid", null);
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("NAME", prod.NAME));
-                nameValuePairs.add(new BasicNameValuePair("CATEGORYID", prod.CATEGORYID.toString()));
+                nameValuePairs.add(new BasicNameValuePair("CATEGORYID", prod.CATEGORYID));
                 nameValuePairs.add(new BasicNameValuePair("PRICE", ""+prod.PRICE));
                 nameValuePairs.add(new BasicNameValuePair("DETAILS", prod.DETAILS));
                 nameValuePairs.add(new BasicNameValuePair("TAG1", prod.TAG1));
                 nameValuePairs.add(new BasicNameValuePair("TAG2", prod.TAG2));
                 nameValuePairs.add(new BasicNameValuePair("TAG3", prod.TAG3));
-                nameValuePairs.add(new BasicNameValuePair("SELLERID", prod.SELLERID.toString()));
+                nameValuePairs.add(new BasicNameValuePair("SELLERID", sellerid));
                 nameValuePairs.add(new BasicNameValuePair("THRESHOLDQUANTITY ", ""+prod.THRESHOLDQUANTITY));
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 Log.e("Lothre3", ""+prod.THRESHOLDQUANTITY);

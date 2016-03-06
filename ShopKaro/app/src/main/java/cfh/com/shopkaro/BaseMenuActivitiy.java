@@ -23,13 +23,22 @@ import cfh.com.shopkaro.dummy.CartContent;
 import cfh.com.shopkaro.dummy.CategoriesContent;
 import cfh.com.shopkaro.dummy.ProductContent;
 
-public class BaseMenuActivitiy extends AppCompatActivity  implements  NavigationView.OnNavigationItemSelectedListener,  ProductPageFragment.OnFragmentInteractionListener, ProductServiceFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener{
+public class BaseMenuActivitiy extends AppCompatActivity  implements  NavigationView.OnNavigationItemSelectedListener,  ProductPageFragment.OnFragmentInteractionListener, ServicePageFragment.OnFragmentInteractionListener, ProductServiceFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener{
 
     @Override
     public void onListFragmentInteraction(ProductContent.DummyItem item) {
-        Fragment fragment = new ProductPageFragment();
+        Fragment fragment;
+        if(!item.isService){
+            Log.e("Fragment", "Product page");
+            fragment = new ProductPageFragment();
+        }
+        else{
+            Log.e("Fragment", "Service page");
+            fragment = new ServicePageFragment();
+        }
+
         Bundle args = new Bundle();
-        args.putString("ProductId", item.id);
+        args.putString("Id", item.id);
         fragment.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -62,10 +71,7 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
         setContentView(R.layout.app_bar_main);
         subActivityLayout = (FrameLayout)findViewById(R.id.base_content);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -128,7 +134,9 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
         Log.d("Activity", "Base onNavigationItemSelected");
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_products) {
+        if(id == R.id.nav_home){
+
+        } else if (id == R.id.nav_products) {
             Fragment fragment = new CategoriesFragment();
             Bundle args = new Bundle();
             args.putBoolean("CategoryName",false);

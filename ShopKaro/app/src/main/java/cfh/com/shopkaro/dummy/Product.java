@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class Product {
     public UUID ID;
-    public UUID CATEGORYID;
+    public String CATEGORYID;
     public String NAME;
     public UUID SELLERID;
     public Boolean ISACTIVE;

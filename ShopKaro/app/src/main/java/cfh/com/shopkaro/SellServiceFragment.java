@@ -1,6 +1,8 @@
 package cfh.com.shopkaro;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -28,6 +30,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +43,11 @@ public class SellServiceFragment extends Fragment{
     public SellServiceFragment(){
 
     }
+
+    private List<String > serviceCategoryIds = Arrays.asList("5D170525-7352-4305-BC70-3726681A8DB3",
+            "5EA7E2F0-926F-47A9-832D-64F1836EC33E","C2A35BA2-33E3-4431-AAE9-7E3A8F61EFE1", "0C1801DF-B385-4730-ACC2-9E13D9146F44",
+            "1400BFE0-6B58-4F05-B9FB-9F25BCAC9621", "E1797E9A-D938-4F3C-B70B-BE8105DB6273", "79EF55F0-0402-42C0-8C5C-D444CDB01457",
+            "E0C71922-1EAC-451C-9184-E980C1D6A679");
 
 
     @Override
@@ -61,10 +69,11 @@ public class SellServiceFragment extends Fragment{
             @Override
             public void onClick(View v){
                 Service service = new Service();
+                Spinner spinner = (Spinner) view.findViewById(R.id.static_service_category_spinner);
+                int selectedCategoryPosition = spinner.getSelectedItemPosition();
+                service.CATEGORYID = serviceCategoryIds.get(selectedCategoryPosition);
                 String temp = ((EditText)view.findViewById(R.id.service_name)).getText().toString();
                 if(temp != null)    service.NAME = temp;
-                service.CATEGORYID = UUID.fromString("E0C71922-1EAC-451C-9184-E980C1D6A679");
-                service.SELLERID = UUID.fromString("A5396330-31CB-43FB-B98C-E6E8CDE97F0C");
                 temp = ((EditText)view.findViewById(R.id.service_price)).getText().toString();
                 Float tempf =  0.0f;
                 if(!temp.isEmpty())    tempf = Float.parseFloat(temp);
@@ -117,14 +126,16 @@ public class SellServiceFragment extends Fragment{
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost("http://shopkaroapi.azurewebsites.net/api/Services/AddNewService");
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                SharedPreferences sp = getContext().getSharedPreferences("LoginSaved", Context.MODE_PRIVATE);
+                String sellerid = sp.getString("userid", null);
                 nameValuePairs.add(new BasicNameValuePair("NAME", serv.NAME));
-                nameValuePairs.add(new BasicNameValuePair("CATEGORYID", serv.CATEGORYID.toString()));
+                nameValuePairs.add(new BasicNameValuePair("CATEGORYID", serv.CATEGORYID));
                 nameValuePairs.add(new BasicNameValuePair("PRICE", ""+serv.PRICE));
                 nameValuePairs.add(new BasicNameValuePair("DETAILS", serv.DETAILS));
                 nameValuePairs.add(new BasicNameValuePair("TAG1", serv.TAG1));
                 nameValuePairs.add(new BasicNameValuePair("TAG2", serv.TAG2));
                 nameValuePairs.add(new BasicNameValuePair("TAG3", serv.TAG3));
-                nameValuePairs.add(new BasicNameValuePair("SELLERID", serv.SELLERID.toString()));
+                nameValuePairs.add(new BasicNameValuePair("SELLERID", sellerid));
                 nameValuePairs.add(new BasicNameValuePair("PLACE",serv.PLACE));
                 nameValuePairs.add(new BasicNameValuePair("CITY",serv.CITY));
                 nameValuePairs.add(new BasicNameValuePair("STATE", serv.STATE));

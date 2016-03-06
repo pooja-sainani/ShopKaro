@@ -73,17 +73,16 @@
         <item>Personal Care</item>
         <item>Household</item>
         <item>Painting</item>
-
     </string-array>
 
     <string-array name="service_categories" id="@+id/service_category">
         <item>Tuitions</item>
         <item>Fitness classes</item>
-        <item>Babysitting</item>
-        <item>Art classes</item>
-        <item>Dance classes</item>
         <item>Music classes</item>
+        <item>Art classes</item>
         <item>Tailoring</item>
+        <item>Babysitting</item>
+        <item>Dance classes</item>
         <item>Cooking</item>
     </string-array>
 
@@ -93,10 +92,10 @@
         <item>Homemade sweets</item>
         <item>Candles</item>
         <item>Cakes</item>
-        <item>Cookies</item>
         <item>Soaps</item>
         <item>Snacks</item>
         <item>Showpieces</item>
+        <item>Cookies</item>
     </string-array>
 
     <string name="add_service">Add service</string>
