@@ -5,10 +5,9 @@ import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,11 +17,41 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
-public class BaseMenuActivitiy extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import cfh.com.shopkaro.dummy.CartContent;
+import cfh.com.shopkaro.dummy.CategoriesContent;
+import cfh.com.shopkaro.dummy.ProductContent;
+
+public class BaseMenuActivitiy extends AppCompatActivity  implements  NavigationView.OnNavigationItemSelectedListener,  ProductPageFragment.OnFragmentInteractionListener, ProductServiceFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener{
+
+    @Override
+    public void onListFragmentInteraction(ProductContent.DummyItem item) {
+        Fragment fragment = new ProductPageFragment();
+        Bundle args = new Bundle();
+        args.putString("ProductId", item.id);
+        fragment.setArguments(args);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+
+
+    @Override
+    public void onListFragmentInteraction(CartContent.CartItem item) {
+    }
+
+    @Override
+    public void onListFragmentInteraction(CategoriesContent.DummyItem item) {
+        Fragment fragment = new ProductServiceFragment();
+        Bundle args = new Bundle();
+        args.putString("CategoryName", item.id);
+        args.putBoolean("ISSERVICE",item.isService);
+        fragment.setArguments(args);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
 
     protected FrameLayout subActivityLayout;
 
@@ -36,15 +65,7 @@ public class BaseMenuActivitiy extends AppCompatActivity implements NavigationVi
 
         setSupportActionBar(toolbar);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -133,6 +154,24 @@ public class BaseMenuActivitiy extends AppCompatActivity implements NavigationVi
             startActivity(intent);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
+        }else if(id==R.id.nav_cart){
+            Fragment fragment = new MyCartFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else if(id==R.id.nav_offered_by_me) {
+            Intent intent = new Intent(this, OfferedByMeActivity.class);
+            startActivity(intent);
+        }else if(id==R.id.nav_my_orders){
+            Intent intent = new Intent(this, MyOrderActivity.class);
+            startActivity(intent);
+        }else if(id==R.id.nav_account){
+
+        }else if(id==R.id.nav_password){
+
+        }else if(id==R.id.nav_logout){
+
         }
 
         return true;
@@ -153,4 +192,8 @@ public class BaseMenuActivitiy extends AppCompatActivity implements NavigationVi
         super.onStop();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

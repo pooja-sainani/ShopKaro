@@ -58,12 +58,14 @@ public class ProductContent {
         public final String name;
         public final Double cost;
         public final String tags;
+        public final String place;
 
-        public DummyItem(String id, String name,Double cost ,String details) {
+        public DummyItem(String id, String name,Double cost ,String details,String place) {
             this.id = id;
             this.name = name;
             this.cost = cost;
             this.tags = details;
+            this.place = place;
         }
 
         @Override

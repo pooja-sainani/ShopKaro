@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import cfh.com.shopkaro.dummy.ProductContent.DummyItem;
-import cfh.com.shopkaro.productFragment.OnListFragmentInteractionListener;
+import cfh.com.shopkaro.ProductServiceFragment.OnListFragmentInteractionListener;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -40,6 +40,7 @@ public class MyproductRecyclerViewAdapter extends RecyclerView.Adapter<Myproduct
         holder.mIdView.setText(mValues.get(position).name);
         holder.mContentView.setText(Double.toString(mValues.get(position).cost));
         holder.mProductDescription.setText(mValues.get(position).tags);
+        holder.mPlace.setText(mValues.get(position).place);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,7 @@ public class MyproductRecyclerViewAdapter extends RecyclerView.Adapter<Myproduct
         public final TextView mIdView;
         public final TextView mContentView;
         public final TextView mProductDescription;
+        public final TextView mPlace;
         public DummyItem mItem;
 
         public ViewHolder(View view) {
@@ -72,6 +74,7 @@ public class MyproductRecyclerViewAdapter extends RecyclerView.Adapter<Myproduct
             mIdView = (TextView) view.findViewById(R.id.item_ProductName);
             mContentView = (TextView) view.findViewById(R.id.item_ProductCost);
             mProductDescription = (TextView) view.findViewById(R.id.item_ProductDescription);
+            mPlace = (TextView) view.findViewById(R.id.item_ServicePlace);
         }
 
 

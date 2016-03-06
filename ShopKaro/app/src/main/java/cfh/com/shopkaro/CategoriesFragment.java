@@ -203,7 +203,7 @@ public class CategoriesFragment extends Fragment {
                 CategoriesContent.COUNT=json.length();
                 for(int i=0;i<json.length();i++){
                     jobj=(JSONObject) json.get(i);
-                    DummyItem item= new DummyItem(jobj.getString("ID"),jobj.getString("NAME"));
+                    DummyItem item= new DummyItem(jobj.getString("ID"),jobj.getString("NAME"),jobj.getBoolean("SERVICE"));
 //                    Landing news=new Landing(jobj.getString("firstName")+" "+jobj.getString("lastName"),jobj.getString("pic") ,jobj.getString("dateTime"), jobj.getString("text"),jobj.getString("imageName"));
 //                    myCars.add(news);
                     CategoriesContent.ITEMS.add(item);

@@ -56,11 +56,13 @@ public class CategoriesContent {
     public static class DummyItem {
         public final String id;
         public final String name;
+        public final boolean isService;
 
 
-        public DummyItem(String id, String  name) {
+        public DummyItem(String id, String  name,Boolean isService) {
             this.id = id;
             this.name = name;
+            this.isService=isService;
 
         }
 

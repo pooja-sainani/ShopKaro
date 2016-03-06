@@ -111,5 +111,6 @@
     <string name="title_activity_base_menu_activitiy">BaseMenuActivitiy</string>
     <string name="title_activity_last_page">LastPage</string>
 
+    <string name="section_format">Section Format</string>
 
 </resources>

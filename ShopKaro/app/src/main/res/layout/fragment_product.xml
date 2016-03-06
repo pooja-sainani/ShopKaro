@@ -59,6 +59,15 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="17dp" />
 
+        <TextView
+            android:id="@+id/item_ServicePlace"
+            android:layout_column="0"
+            android:layout_gravity="left|top"
+            android:layout_row="3"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="17dp" />
+
     </GridLayout>
 
 </LinearLayout>
