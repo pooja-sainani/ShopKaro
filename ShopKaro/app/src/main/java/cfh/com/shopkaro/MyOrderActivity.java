@@ -15,7 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MyOrderActivity extends AppCompatActivity {
+import cfh.com.shopkaro.dummy.OrderProductContent;
+import cfh.com.shopkaro.dummy.OrderServiceContent;
+
+public class MyOrderActivity extends AppCompatActivity implements MyOrderProduct.OnListFragmentInteractionListener,MyOrderService.OnListFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -31,6 +34,28 @@ public class MyOrderActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    @Override
+    public void onListFragmentInteraction(OrderProductContent.DummyItem item) {
+//        android.app.Fragment fragment = new MyOrderProduct();
+//        Bundle args = new Bundle();
+//        args.putString("Order id", item);
+//        fragment.setArguments(args);
+//        android.app.FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+//
+    }
+
+    @Override
+    public void onListFragmentInteraction(OrderServiceContent.DummyItem item) {
+//        android.app.Fragment fragment = new MyOrderProduct();
+//        Bundle args = new Bundle();
+//        args.putString("Order id", item);
+//        fragment.setArguments(args);
+//        android.app.FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+//
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +149,8 @@ public class MyOrderActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
            switch(position){
-                case 0: return  MyOrderProduct.newInstance();
-                case 1 : return  MyOrderService.newInstance();
+                case 0: return  new MyOrderProduct();
+                case 1 : return  new MyOrderService();
                 default: PlaceholderFragment.newInstance(position + 1);
 
             }
