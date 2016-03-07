@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 /**
  * Created by Pooja on 3/5/2016.
  */
-public class OfferedByMeServices extends Fragment {
+public class ServicesOfferedByMeFragment extends Fragment {
 
-    public static OfferedByMeServices newInstance() {
-        OfferedByMeServices fragment = new OfferedByMeServices();
+    public static ServicesOfferedByMeFragment newInstance() {
+        ServicesOfferedByMeFragment fragment = new ServicesOfferedByMeFragment();
         return fragment;
     }
 
-    public OfferedByMeServices() {
+    public ServicesOfferedByMeFragment() {
     }
 
 
