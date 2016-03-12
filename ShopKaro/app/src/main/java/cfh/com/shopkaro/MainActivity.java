@@ -1,5 +1,7 @@
 package cfh.com.shopkaro;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +12,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 //import android.support.v4.app.Fragment;
 
-public class MainActivity extends BaseMenuActivitiy
-        implements     ProductPageFragment.OnFragmentInteractionListener, ProductServiceFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,MyCartFragment.OnListFragmentInteractionListener {
+public class MainActivity extends BaseMenuActivitiy {
 
 
     /**
@@ -27,10 +28,33 @@ public class MainActivity extends BaseMenuActivitiy
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("Activity", "Main");
-
         getLayoutInflater().inflate(R.layout.activity_main, subActivityLayout);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            int fragmentId = bundle.getInt("fragment");
 
-    // ATTENTION: This was auto-generated to implement the App Indexing API.
+            Fragment fragment = null;
+            Bundle args = new Bundle();
+
+            if(fragmentId == R.id.nav_products) {
+                fragment = new CategoriesFragment();
+                args.putBoolean("CategoryName", false);
+            }
+            else  if(fragmentId == R.id.nav_services){
+                fragment = new CategoriesFragment();
+                args.putBoolean("CategoryName", true);
+            }
+            else if (fragmentId == R.id.nav_cart){
+                fragment = new MyCartFragment();
+            }
+
+            if(fragmentId == 123)   return;
+            fragment.setArguments(args);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        }
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
     // See https://g.co/AppIndexing/AndroidStudio for more information.
     client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 }

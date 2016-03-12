@@ -17,4 +17,18 @@ public class Product {
     public String TAG3;
     public float PRICE;
     public int THRESHOLDQUANTITY;
+    public int QUANTITYSOLD;
+    public int QUANTITYAVAILABLE;
+    public double AVGRATING;
+
+    public  Product(){
+
+    }
+
+    public Product(String NAME, double AVGRATING, int QUANTITYAVAILABLE, int QUANTITYSOLD){
+        this.NAME = NAME;
+        this.AVGRATING = AVGRATING;
+        this.QUANTITYAVAILABLE = QUANTITYAVAILABLE;
+        this.QUANTITYSOLD = QUANTITYSOLD;
+    }
 }

@@ -20,4 +20,16 @@ public class Service {
     public String STATE;
     public int PINCODE;
     public float PRICE;
+    public double AVGRATING;
+    public int NUMBEROFUSERS;
+
+    public Service(){
+
+    }
+
+    public Service(String NAME, double AVGRATING, int NUMBEROFUSERS){
+        this.NAME = NAME;
+        this.AVGRATING = AVGRATING;
+        this.NUMBEROFUSERS = NUMBEROFUSERS;
+    }
 }
