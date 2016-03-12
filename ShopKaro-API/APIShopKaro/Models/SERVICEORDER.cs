@@ -16,7 +16,7 @@ namespace APIShopKaro.Models
     {
         public System.Guid SERVICEID { get; set; }
         public System.Guid BUYERID { get; set; }
-        public byte[] ORDERDATE { get; set; }
+        public Nullable<System.DateTime> Orderdate { get; set; }
     
         public virtual USER USER { get; set; }
         public virtual SERVICE SERVICE { get; set; }

@@ -23,6 +23,7 @@ namespace APIShopKaro.Controllers
         {
             try
             {
+                service.ISACTIVE = true;
                 var servicesService = new ServicessService();
                 var id = servicesService.AddNewService(service);
                 var response = Request.CreateResponse(HttpStatusCode.OK, id);
@@ -40,7 +41,7 @@ namespace APIShopKaro.Controllers
         /// </summary>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("GetAllServicesByCategory/{categoryId}")]
         public HttpResponseMessage GetAllServicesByCategory(Guid? categoryId)
         {
@@ -63,7 +64,7 @@ namespace APIShopKaro.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("GetServiceById/{id}")]
         public HttpResponseMessage GetServiceById(Guid? id)
         {
@@ -103,5 +104,30 @@ namespace APIShopKaro.Controllers
                 return error;
             }
         }
+
+
+        /// <summary>
+        /// Get Service by Seller id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetAllServicesOfferedByMe/{id}")]
+        public HttpResponseMessage GetAllServicesOfferedByMe(Guid? id)
+        {
+            try
+            {
+                var serviceService = new ServicessService();
+                var services = serviceService.GetAllServicesOfferedByMe(id);
+                var response = Request.CreateResponse(HttpStatusCode.OK, services);
+                return response;
+            }
+            catch (Exception e)
+            {
+                var error = Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return error;
+            }
+        }
+
     }
 }

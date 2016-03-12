@@ -29,6 +29,10 @@ namespace APIShopKaro.Services
                 if (!service.ID.HasValue || service.ID.Value == Guid.Empty)
                     service.ID = Guid.NewGuid();
 
+                service.AVGRATING = 0;
+                service.ISACTIVE = true;
+                service.NUMBEROFUSERS = 0;
+
                 using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
                 {
                     try
@@ -166,5 +170,49 @@ namespace APIShopKaro.Services
                 throw;
             }
         }
+
+        /// <summary>
+        /// Get Service by seller id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<SERVICE> GetAllServicesOfferedByMe(Guid? id)
+        {
+            try
+            {
+                if (!id.HasValue || id.Value == Guid.Empty)
+                    throw new ArgumentNullException("ID", "ID can not be null");
+
+                List<SERVICE> product;
+
+                using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
+                {
+                    try
+                    {
+                        product = (from p in db.SERVICES
+                                   where p.SELLERID == id
+                                   select p).ToList();
+                    }
+                    catch (System.Data.DataException e)
+                    {
+                        throw new Exception(e.InnerException.InnerException.Message);
+                    }
+                    catch (ArgumentNullException e)
+                    {
+                        product = null; // no such product
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        product = null; // multiple products with same id
+                    }
+                }
+                return product;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
     }
 }

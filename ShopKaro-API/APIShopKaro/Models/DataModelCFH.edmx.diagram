@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="47d31b6a332943ac9a8471a995e329d9" Name="Diagram1">
+      <Diagram DiagramId="1c13809eff654c42a49a32340c4a575c" Name="Diagram1">
         <EntityTypeShape EntityType="apsteamCFHModel.CART" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.CATEGORy" Width="1.5" PointX="8" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.ORDERPRODUCT" Width="1.5" PointX="7.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.CATEGORy" Width="1.5" PointX="8" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.ORDERPRODUCT" Width="1.5" PointX="7.5" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="apsteamCFHModel.ORDER" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.PRODUCT" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.REVIEW" Width="1.5" PointX="12.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.PRODUCT" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.REVIEW" Width="1.5" PointX="12.5" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="apsteamCFHModel.ROLE" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.SERVICEORDER" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.SERVICE" Width="1.5" PointX="10.25" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.USER" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="apsteamCFHModel.database_firewall_rules" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.SERVICEORDER" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.SERVICE" Width="1.5" PointX="10.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.USER" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="apsteamCFHModel.database_firewall_rules" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="apsteamCFHModel.FK__CART__BUYERID__46B27FE2" ManuallyRouted="false" />
         <AssociationConnector Association="apsteamCFHModel.FK__CART__PRODUCTID__45BE5BA9" ManuallyRouted="false" />
         <AssociationConnector Association="apsteamCFHModel.FK__PRODUCTS__CATEGO__00200768" ManuallyRouted="false" />

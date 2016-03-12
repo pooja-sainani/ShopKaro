@@ -27,7 +27,8 @@ namespace APIShopKaro.Models
         public string STATE { get; set; }
         public int PINCODE { get; set; }
         public decimal TOTATPRICE { get; set; }
-        public byte[] ORDERDATE { get; set; }
+        public Nullable<bool> ISSERVICE { get; set; }
+        public Nullable<System.DateTime> ORDERDATE { get; set; }
     
         public virtual ICollection<ORDERPRODUCT> ORDERPRODUCTS { get; set; }
         public virtual USER USER { get; set; }

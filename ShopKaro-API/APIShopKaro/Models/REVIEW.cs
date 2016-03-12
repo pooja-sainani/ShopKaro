@@ -20,7 +20,7 @@ namespace APIShopKaro.Models
         public Nullable<System.Guid> REVIEWERID { get; set; }
         public Nullable<int> RATING { get; set; }
         public string COMMENTS { get; set; }
-        public byte[] REVIEWDATE { get; set; }
+        public Nullable<System.DateTime> REVIEWDATE { get; set; }
     
         public virtual PRODUCT PRODUCT { get; set; }
         public virtual USER USER { get; set; }

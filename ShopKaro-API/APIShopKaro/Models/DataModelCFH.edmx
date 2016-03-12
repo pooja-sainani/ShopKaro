@@ -45,7 +45,8 @@
           <Property Name="STATE" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="PINCODE" Type="int" Nullable="false" />
           <Property Name="TOTATPRICE" Type="money" Nullable="false" />
-          <Property Name="ORDERDATE" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="ISSERVICE" Type="bit" />
+          <Property Name="ORDERDATE" Type="datetime" />
         </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
@@ -76,7 +77,7 @@
           <Property Name="REVIEWERID" Type="uniqueidentifier" />
           <Property Name="RATING" Type="int" />
           <Property Name="COMMENTS" Type="varchar" MaxLength="255" />
-          <Property Name="REVIEWDATE" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="REVIEWDATE" Type="datetime" />
         </EntityType>
         <EntityType Name="ROLES">
           <Key>
@@ -92,7 +93,7 @@
           </Key>
           <Property Name="SERVICEID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="BUYERID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ORDERDATE" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Orderdate" Type="datetime" />
         </EntityType>
         <EntityType Name="SERVICES">
           <Key>
@@ -111,7 +112,9 @@
           <Property Name="CITY" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="STATE" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="PINCODE" Type="int" Nullable="false" />
-          <Property Name="PRICE" Type="money" Nullable="false" />
+		  <Property Name="PRICE" Type="money" Nullable="false" />
+		  <Property Name="NUMBEROFUSERS" Type="int" />
+		  <Property Name="AVGRATING" Type="decimal" Precision="18" Scale="0"/>
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -477,7 +480,8 @@ warning 6002: The table/view 'apsteamCFH.sys.database_firewall_rules' does not h
           <Property Name="STATE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PINCODE" Type="Int32" Nullable="false" />
           <Property Name="TOTATPRICE" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="ORDERDATE" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ISSERVICE" Type="Boolean" />
+          <Property Name="ORDERDATE" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ORDERPRODUCTS" Relationship="Self.FK__ORDERPROD__ORDER__540C7B00" FromRole="ORDERS" ToRole="ORDERPRODUCTS" />
           <NavigationProperty Name="USER" Relationship="Self.FK__ORDERS__BUYERID__4B7734FF" FromRole="ORDERS" ToRole="USERS" />
         </EntityType>
@@ -515,7 +519,7 @@ warning 6002: The table/view 'apsteamCFH.sys.database_firewall_rules' does not h
           <Property Name="REVIEWERID" Type="Guid" />
           <Property Name="RATING" Type="Int32" />
           <Property Name="COMMENTS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="REVIEWDATE" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="REVIEWDATE" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK__REVIEWS__PRODUCT__3E1D39E1" FromRole="REVIEWS" ToRole="PRODUCTS" />
           <NavigationProperty Name="USER" Relationship="Self.FK__REVIEWS__REVIEWE__40058253" FromRole="REVIEWS" ToRole="USERS" />
           <NavigationProperty Name="SERVICE" Relationship="Self.FK__REVIEWS__SERVICE__3F115E1A" FromRole="REVIEWS" ToRole="SERVICES" />
@@ -535,7 +539,7 @@ warning 6002: The table/view 'apsteamCFH.sys.database_firewall_rules' does not h
           </Key>
           <Property Name="SERVICEID" Type="Guid" Nullable="false" />
           <Property Name="BUYERID" Type="Guid" Nullable="false" />
-          <Property Name="ORDERDATE" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Orderdate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="USER" Relationship="Self.FK__SERVICEOR__BUYER__5CA1C101" FromRole="SERVICEORDER" ToRole="USERS" />
           <NavigationProperty Name="SERVICE" Relationship="Self.FK__SERVICEOR__SERVI__5BAD9CC8" FromRole="SERVICEORDER" ToRole="SERVICES" />
         </EntityType>
@@ -557,6 +561,8 @@ warning 6002: The table/view 'apsteamCFH.sys.database_firewall_rules' does not h
           <Property Name="STATE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PINCODE" Type="Int32" Nullable="false" />
           <Property Name="PRICE" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+		  <Property Name="NUMBEROFUSERS" Type="Int32" />
+		  <Property Name="AVGRATING" Type="Decimal" Precision="18" Scale="0"/>
           <NavigationProperty Name="CATEGORy" Relationship="Self.FK__SERVICES__CATEGO__05D8E0BE" FromRole="SERVICES" ToRole="CATEGORIES" />
           <NavigationProperty Name="REVIEWS" Relationship="Self.FK__REVIEWS__SERVICE__3F115E1A" FromRole="SERVICES" ToRole="REVIEWS" />
           <NavigationProperty Name="SERVICEORDERs" Relationship="Self.FK__SERVICEOR__SERVI__5BAD9CC8" FromRole="SERVICES" ToRole="SERVICEORDER" />
@@ -918,6 +924,7 @@ warning 6002: The table/view 'apsteamCFH.sys.database_firewall_rules' does not h
                 <ScalarProperty Name="STATE" ColumnName="STATE" />
                 <ScalarProperty Name="PINCODE" ColumnName="PINCODE" />
                 <ScalarProperty Name="TOTATPRICE" ColumnName="TOTATPRICE" />
+                <ScalarProperty Name="ISSERVICE" ColumnName="ISSERVICE" />
                 <ScalarProperty Name="ORDERDATE" ColumnName="ORDERDATE" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -968,7 +975,7 @@ warning 6002: The table/view 'apsteamCFH.sys.database_firewall_rules' does not h
               <MappingFragment StoreEntitySet="SERVICEORDER">
                 <ScalarProperty Name="SERVICEID" ColumnName="SERVICEID" />
                 <ScalarProperty Name="BUYERID" ColumnName="BUYERID" />
-                <ScalarProperty Name="ORDERDATE" ColumnName="ORDERDATE" />
+                <ScalarProperty Name="Orderdate" ColumnName="Orderdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -989,6 +996,8 @@ warning 6002: The table/view 'apsteamCFH.sys.database_firewall_rules' does not h
                 <ScalarProperty Name="STATE" ColumnName="STATE" />
                 <ScalarProperty Name="PINCODE" ColumnName="PINCODE" />
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+			    <ScalarProperty Name="NUMBEROFUSERS" ColumnName="NUMBEROFUSERS"/>
+				<ScalarProperty Name="AVGRATING" ColumnName="AVGRATING"/>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

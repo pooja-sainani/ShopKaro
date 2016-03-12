@@ -100,13 +100,15 @@ namespace APIShopKaro.Services
                     throw new ArgumentException("Both PRODUCTID SERVICEID can not be null together", "UserReview");
 
                 if ((userReview.PRODUCTID.HasValue && userReview.PRODUCTID.Value != Guid.Empty) && (userReview.SERVICEID.HasValue && userReview.SERVICEID.Value != Guid.Empty))
-                    throw new ArgumentException("Both PRODUCTID SERVICEID can have values together", "UserReview");
+                    throw new ArgumentException("Both PRODUCTID SERVICEID can not have values together", "UserReview");
 
                 if(!userReview.REVIEWERID.HasValue || userReview.REVIEWERID.Value == Guid.Empty)
                     throw new ArgumentException("REVIEWERID can not be null", "UserReview");
 
                 if (userReview.RATING == null && string.IsNullOrEmpty(userReview.COMMENTS))
                     return Guid.Empty;
+
+                userReview.REVIEWDATE = DateTime.Now;
 
                 using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
                 {

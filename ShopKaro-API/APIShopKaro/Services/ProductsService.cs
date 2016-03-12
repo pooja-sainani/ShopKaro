@@ -29,6 +29,9 @@ namespace APIShopKaro.Services
                 if (!product.ID.HasValue || product.ID.Value == Guid.Empty)
                     product.ID = Guid.NewGuid();
 
+                product.AVGRATING = 0;
+                product.QUANTITYSOLD = 0;
+               
                 using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
                 {
                     try
@@ -119,6 +122,50 @@ namespace APIShopKaro.Services
                         product = null; // no such product
                     }
                     catch(InvalidOperationException e)
+                    {
+                        product = null; // multiple products with same id
+                    }
+                }
+                return product;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Get product by seller id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<PRODUCT> GetProductBySellerId(Guid? id)
+        {
+            try
+            {
+                if (!id.HasValue || id.Value == Guid.Empty)
+                    throw new ArgumentNullException("ID", "ID can not be null");
+
+                List<PRODUCT> product;
+
+                using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
+                {
+                    try
+                    {
+                        product = (from p in db.PRODUCTS
+                                   where p.SELLERID == id
+                                   select p).ToList();
+                    }
+                    catch (System.Data.DataException e)
+                    {
+                        throw new Exception(e.InnerException.InnerException.Message);
+                    }
+                    catch (ArgumentNullException e)
+                    {
+                        product = null; // no such product
+                    }
+                    catch (InvalidOperationException e)
                     {
                         product = null; // multiple products with same id
                     }

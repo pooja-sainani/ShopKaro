@@ -69,12 +69,12 @@ namespace APIShopKaro.Controllers
         [HttpPost]
         [Route("GetUserLogin")]
         [ResponseType(typeof(USER))]
-        public HttpResponseMessage GetUserLogin(String UserEmail , String UserPassword)
+        public HttpResponseMessage GetUserLogin(USER userobj)
         {
             try
             {
                 var userService = new UserService();
-                var user = userService.GetUserById(UserEmail,UserPassword);
+                var user = userService.GetUserById(userobj.EMAILID,userobj.PASSWORD);
                 
                 if (user != null)
                 {

@@ -224,8 +224,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -238,6 +240,7 @@
     <Compile Include="Models\CART.cs">
       <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartProduct.cs" />
     <Compile Include="Models\CATEGORy.cs">
       <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
@@ -266,9 +269,11 @@
     <Compile Include="Models\ORDERPRODUCT.cs">
       <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderProducts.cs" />
     <Compile Include="Models\PRODUCT.cs">
       <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductsInOrder.cs" />
     <Compile Include="Models\REVIEW.cs">
       <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
@@ -281,13 +286,16 @@
     <Compile Include="Models\SERVICEORDER.cs">
       <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SubscribedService.cs" />
     <Compile Include="Models\USER.cs">
       <DependentUpon>DataModelCFH.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\CommonService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\ServicesService.cs" />
@@ -343,6 +351,8 @@
     <Content Include="Models\DataModelCFH.edmx.diagram">
       <DependentUpon>DataModelCFH.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\ShopKaroApi - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ShopKaroApi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ShopKaroApi.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

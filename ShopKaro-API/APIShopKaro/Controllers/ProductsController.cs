@@ -40,7 +40,7 @@ namespace APIShopKaro.Controllers
         /// </summary>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("GetAllProductsByCategory/{categoryId}")]
         public HttpResponseMessage GetAllProductsByCategory(Guid? categoryId)
         {
@@ -63,7 +63,7 @@ namespace APIShopKaro.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("GetProductById/{id}")]
         public HttpResponseMessage GetProductById(Guid? id)
         {
@@ -80,6 +80,31 @@ namespace APIShopKaro.Controllers
                 return error;
             }
         }
+
+
+        /// <summary>
+        /// Get product by Seller id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetProductsByOfferedByMe/{id}")]
+        public HttpResponseMessage GetProductsByOfferedByMe(Guid? id)
+        {
+            try
+            {
+                var productsService = new ProductsService();
+                var product = productsService.GetProductBySellerId(id);
+                var response = Request.CreateResponse(HttpStatusCode.OK, product);
+                return response;
+            }
+            catch (Exception e)
+            {
+                var error = Request.CreateResponse(HttpStatusCode.InternalServerError, e.Message);
+                return error;
+            }
+        }
+
 
         /// <summary>
         /// Delete Product

@@ -34,7 +34,9 @@ namespace APIShopKaro.Models
         public string STATE { get; set; }
         public int PINCODE { get; set; }
         public decimal? PRICE { get; set; }
-    
+        public decimal AVGRATING { get; set; }
+        public int NUMBEROFUSERS { get; set; }
+
         public virtual CATEGORy CATEGORy { get; set; }
         public virtual ICollection<REVIEW> REVIEWS { get; set; }
         public virtual ICollection<SERVICEORDER> SERVICEORDERs { get; set; }

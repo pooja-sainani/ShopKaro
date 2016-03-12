@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using APIShopKaro.Models;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace APIShopKaro.Services
 {
@@ -48,6 +50,8 @@ namespace APIShopKaro.Services
                 if (!user.ID.HasValue || user.ID.Value == Guid.Empty)
                     user.ID = Guid.NewGuid();
 
+               //  user.ROLE.ROLENAME = "BUYER";
+
                 using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
                 {
                     try
@@ -55,6 +59,20 @@ namespace APIShopKaro.Services
                         db.USERS.Add(user);
                         db.SaveChanges();
                     }
+
+                    catch (DbEntityValidationException dbEx)
+                    {
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                Trace.TraceInformation("Property: {0} Error: {1}",
+                                                        validationError.PropertyName,
+                                                        validationError.ErrorMessage);
+                            }
+                        }
+                    }
+
                     catch(System.Data.DataException e)
                     {
                         throw new Exception(e.InnerException.InnerException.Message);
