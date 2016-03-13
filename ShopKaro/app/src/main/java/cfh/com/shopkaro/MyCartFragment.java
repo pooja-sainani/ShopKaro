@@ -69,7 +69,7 @@ public class MyCartFragment extends Fragment {
     private static  RecyclerView recyclerView;
     private int mColumnCount = 1;
     public Context context;
-    public static MyCartFragmentRecyclerViewAdapter objectAdapter;
+    public static MyCartRecyclerViewAdapter objectAdapter;
     public Button buyButton;
     String email;
     private TextView tvTotalPrice;
@@ -113,7 +113,7 @@ public class MyCartFragment extends Fragment {
         // Inflate the layout for this fragment
         CartContent.ITEMS.clear();
 
-        view = inflater.inflate(R.layout.fragment_my_cart, container, false);
+        view = inflater.inflate(R.layout.fragment_mycart_list, container, false);
 //        View footerView = inflater.inflate(R.layout.footer_cart, null);
 //        ListView listview = (ListView) view.findViewById(R.id.list);
 //        listview.addFooterView(footerView);
@@ -148,7 +148,7 @@ public class MyCartFragment extends Fragment {
         });
 
         return view;
-       // return inflater.inflate(R.layout.fragment_my_cart, container, false);
+       // return inflater.inflate(R.layout.fragment_mycart_list, container, false);
     }
 
     public  void removeProductFromCart(String id){
@@ -254,9 +254,9 @@ public class MyCartFragment extends Fragment {
                     CartContent.ITEMS.add(item);
                 }
                 tvTotalPrice.setText(Double.toString(totalprice));
-                //objectAdapter = new MyCartFragmentRecyclerViewAdapter(CartContent.ITEMS, mListener);
-//                recyclerView.setAdapter(new MyCartFragmentRecyclerViewAdapter(CartContent.ITEMS, mListener));
-                recyclerView.setAdapter( new MyCartFragmentRecyclerViewAdapter(CartContent.ITEMS, mListener));
+                //objectAdapter = new MyCartRecyclerViewAdapter(CartContent.ITEMS, mListener);
+//                recyclerView.setAdapter(new MyCartRecyclerViewAdapter(CartContent.ITEMS, mListener));
+                recyclerView.setAdapter( new MyCartRecyclerViewAdapter(CartContent.ITEMS, mListener));
                 //list.setAdapter(adapter);
             } catch (JSONException e) {
                 // TODO Auto-generated catch block

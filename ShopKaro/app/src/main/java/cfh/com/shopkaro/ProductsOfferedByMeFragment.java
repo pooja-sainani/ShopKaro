@@ -31,7 +31,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import cfh.com.shopkaro.dummy.OrderProductContent;
 import cfh.com.shopkaro.dummy.Product;
 
 /**
@@ -62,7 +61,7 @@ public class ProductsOfferedByMeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         new GetProductsOfferedByMeTask().execute();
-        View view = inflater.inflate(R.layout.fragment_offeredbyme_productslist, container, false);
+        View view = inflater.inflate(R.layout.fragment_offeredbyme_products_list, container, false);
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

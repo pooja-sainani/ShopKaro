@@ -1,7 +1,6 @@
 package cfh.com.shopkaro;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,7 @@ public class ProductsOfferedByMeRecyclerViewAdapter extends RecyclerView.Adapter
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_offeredbyme_productitem, parent, false);
+                .inflate(R.layout.fragment_offeredbyme_products_item, parent, false);
         return new ViewHolder(view);
     }
 

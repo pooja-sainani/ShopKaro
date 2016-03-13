@@ -1,11 +1,10 @@
 package cfh.com.shopkaro;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +28,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import cfh.com.shopkaro.dummy.OrderProductContent;
+import cfh.com.shopkaro.dummy.ProductContent;
+import cfh.com.shopkaro.dummy.ProductContent.DummyItem;
 
 /**
  * A fragment representing a list of Items.
@@ -37,27 +37,30 @@ import cfh.com.shopkaro.dummy.OrderProductContent;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MyOrderProduct extends Fragment {
+public class ProductsAndServicesListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private ProgressDialog pDialog;
     private OnListFragmentInteractionListener mListener;
-    private RecyclerView recyclerView;
+    private ProgressDialog pDialog;
+    private static View view;
+    private static  RecyclerView recyclerView;
 
+    private static String category;
+    private static Boolean isservice;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MyOrderProduct() {
+    public ProductsAndServicesListFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static MyOrderProduct newInstance(int columnCount) {
-        MyOrderProduct fragment = new MyOrderProduct();
+    public static ProductsAndServicesListFragment newInstance(int columnCount) {
+        ProductsAndServicesListFragment fragment = new ProductsAndServicesListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -68,6 +71,9 @@ public class MyOrderProduct extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle bundle = this.getArguments();
+        category=bundle.getString("CategoryName");
+        isservice=bundle.getBoolean("ISSERVICE");
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -77,23 +83,26 @@ public class MyOrderProduct extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        OrderProductContent.ITEMS.clear();
-        new OrderProductTask().execute();
-        View view = inflater.inflate(R.layout.fragment_orderproductitem_list, container, false);
-
+        ProductContent.ITEMS.clear();
+        new ProductTask().execute();
+        view = inflater.inflate(R.layout.fragment_categories_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-             recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-         //   recyclerView.setAdapter(new MyOrderProductItemRecyclerViewAdapter(OrderProductContent.ITEMS, mListener));
+//            recyclerView.setAdapter(new CategoriesRecyclerViewAdapter(CategoriesContent.ITEMS, mListener));
         }
-        return view;
+
+
+
+
+    return view;
     }
 
 
@@ -114,22 +123,13 @@ public class MyOrderProduct extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(OrderProductContent.DummyItem item);
+        void onListFragmentInteraction(DummyItem item);
     }
 
-    private class OrderProductTask extends AsyncTask<String, Integer, String> {
+    private class ProductTask extends AsyncTask<String, Integer, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -147,10 +147,15 @@ public class MyOrderProduct extends Fragment {
 
             HttpClient httpClient = new DefaultHttpClient();
             HttpContext localContext = new BasicHttpContext();
+            HttpGet httpGet;
             Log.e("ASHU", "CALL");
-            SharedPreferences sp = getContext().getSharedPreferences("LoginSaved", Context.MODE_PRIVATE);
-            String email = sp.getString("userid", null);
-            HttpGet httpGet = new HttpGet("http://shopkaroapi.azurewebsites.net/api/Orders/GetAllProductOrdersByUser/"+ email);
+            if(!isservice) {
+              httpGet = new HttpGet("http://shopkaroapi.azurewebsites.net/api/Products/GetAllProductsByCategory/" + category);
+            }
+            else{
+                httpGet = new HttpGet("http://shopkaroapi.azurewebsites.net/api/Services/GetAllServicesByCategory/" + category);
+            }
+                Log.e("POOJA - BEFORE CALL","http://shopkaroapi.azurewebsites.net/api/Services/GetAllServicesByCategory/" + category);
             // String text = null;
             //172.168.129.103
             Log.e("ASHU","AFTERCALL");
@@ -194,15 +199,21 @@ public class MyOrderProduct extends Fragment {
                 Log.e("FINALASHU", result);
                 JSONArray json = new JSONArray(result);
                 JSONObject jobj=null;
-                //CategoriesContent.COUNT=json.length();
+                ProductContent.COUNT=json.length();
                 for(int i=0;i<json.length();i++){
                     jobj=(JSONObject) json.get(i);
-                    OrderProductContent.DummyItem item= new OrderProductContent.DummyItem(jobj.getString("ID").replace("-",""),jobj.getString("TOTATPRICE"),jobj.getString("ORDERDATE"));
-//                    Landing news=new Landing(jobj.getString("firstName")+" "+jobj.getString("lastName"),jobj.getString("pic") ,jobj.getString("dateTime"), jobj.getString("text"),jobj.getString("imageName"));
-//                    myCars.add(news);
-                    OrderProductContent.ITEMS.add(item);
+                    ProductContent.DummyItem item;
+                    if(!isservice) {
+                         item = new ProductContent.DummyItem(jobj.getString("ID"), jobj.getString("NAME"), jobj.getDouble("PRICE"), jobj.getString("TAG1") + " " + jobj.getString("TAG2") + " " + jobj.getString("TAG3"),"", false);
+                    }
+                    else{
+                        item = new ProductContent.DummyItem(jobj.getString("ID"), jobj.getString("NAME"), jobj.getDouble("PRICE"), jobj.getString("TAG1") + " " + jobj.getString("TAG2") + " " + jobj.getString("TAG3"),jobj.getString("PLACE"), true);
+                    }
+
+                    ProductContent.ITEMS.add(item);
                 }
-                recyclerView.setAdapter(new MyOrderProductItemRecyclerViewAdapter(OrderProductContent.ITEMS, mListener));
+                recyclerView.setAdapter(new ProductsAndServicesListRecyclerViewAdapter(ProductContent.ITEMS, mListener));
+
                 //list.setAdapter(adapter);
             } catch (JSONException e) {
                 // TODO Auto-generated catch block

@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -23,11 +22,9 @@ import org.apache.http.protocol.HttpContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import cfh.com.shopkaro.dummy.CategoriesContent;
 import cfh.com.shopkaro.dummy.CategoriesContent.DummyItem;
 
@@ -83,7 +80,7 @@ public class CategoriesFragment extends Fragment {
 
        CategoriesContent.ITEMS.clear();
         new CategoriesTask().execute();
-         view = inflater.inflate(R.layout.fragment_products_list, container, false);
+         view = inflater.inflate(R.layout.fragment_categories_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -94,7 +91,7 @@ public class CategoriesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-//            recyclerView.setAdapter(new MyCategoriesRecyclerViewAdapter(CategoriesContent.ITEMS, mListener));
+//            recyclerView.setAdapter(new CategoriesRecyclerViewAdapter(CategoriesContent.ITEMS, mListener));
         }
         return view;
     }
@@ -208,7 +205,7 @@ public class CategoriesFragment extends Fragment {
 //                    myCars.add(news);
                     CategoriesContent.ITEMS.add(item);
                 }
-                recyclerView.setAdapter(new MyCategoriesRecyclerViewAdapter(CategoriesContent.ITEMS, mListener));
+                recyclerView.setAdapter(new CategoriesRecyclerViewAdapter(CategoriesContent.ITEMS, mListener));
                 //list.setAdapter(adapter);
             } catch (JSONException e) {
                 // TODO Auto-generated catch block

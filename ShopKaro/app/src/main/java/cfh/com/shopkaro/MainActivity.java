@@ -51,7 +51,7 @@ public class MainActivity extends BaseMenuActivitiy {
             if(fragmentId == 123)   return;
             fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
         }
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -61,7 +61,13 @@ public class MainActivity extends BaseMenuActivitiy {
 
     @Override
     public void onBackPressed() {
-       super.onBackPressed();
+        int count = getFragmentManager().getBackStackEntryCount();
+        Log.d("Stack count", ""+count);
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
 
    /* public boolean onCreateOptionsMenu(Menu menu) {

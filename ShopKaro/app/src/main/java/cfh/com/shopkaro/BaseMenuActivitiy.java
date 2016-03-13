@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-
 import cfh.com.shopkaro.dummy.CartContent;
 import cfh.com.shopkaro.dummy.CategoriesContent;
 import cfh.com.shopkaro.dummy.OrderProductContent;
@@ -27,9 +26,9 @@ import cfh.com.shopkaro.dummy.ProductContent;
 
 public class BaseMenuActivitiy extends AppCompatActivity  implements  NavigationView.OnNavigationItemSelectedListener,
         ProductPageFragment.OnFragmentInteractionListener, ServicePageFragment.OnFragmentInteractionListener,
-        ProductServiceFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,
-        MyCartFragment.OnListFragmentInteractionListener, MyOrderProduct.OnListFragmentInteractionListener,
-        MyOrderService.OnListFragmentInteractionListener{
+        ProductsAndServicesListFragment.OnListFragmentInteractionListener,CategoriesFragment.OnListFragmentInteractionListener,
+        MyCartFragment.OnListFragmentInteractionListener, MyOrderProductsFragment.OnListFragmentInteractionListener,
+        MyOrderServicesFragment.OnListFragmentInteractionListener{
 
     @Override
     public void onListFragmentInteraction(ProductContent.DummyItem item) {
@@ -47,10 +46,8 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
         args.putString("Id", item.id);
         fragment.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
     }
-
-
 
     @Override
     public void onListFragmentInteraction(CartContent.CartItem item) {
@@ -58,18 +55,18 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
 
     @Override
     public void onListFragmentInteraction(CategoriesContent.DummyItem item) {
-        Fragment fragment = new ProductServiceFragment();
+        Fragment fragment = new ProductsAndServicesListFragment();
         Bundle args = new Bundle();
         args.putString("CategoryName", item.id);
         args.putBoolean("ISSERVICE", item.isService);
         fragment.setArguments(args);
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
     }
 
     @Override
     public void onListFragmentInteraction(OrderProductContent.DummyItem item) {
-//        android.app.Fragment fragment = new MyOrderProduct();
+//        android.app.Fragment fragment = new MyOrderProductsFragment();
 //        Bundle args = new Bundle();
 //        args.putString("Order id", item);
 //        fragment.setArguments(args);
@@ -80,7 +77,7 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
 
     @Override
     public void onListFragmentInteraction(OrderServiceContent.DummyItem item) {
-//        android.app.Fragment fragment = new MyOrderProduct();
+//        android.app.Fragment fragment = new MyOrderProductsFragment();
 //        Bundle args = new Bundle();
 //        args.putString("Order id", item);
 //        fragment.setArguments(args);
@@ -89,14 +86,13 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
 //
     }
 
-
     protected FrameLayout subActivityLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("Activity", "Base Menu");
-        setContentView(R.layout.app_bar_main);
+        setContentView(R.layout.app_bar);
         subActivityLayout = (FrameLayout)findViewById(R.id.base_content);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -105,10 +101,8 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -136,7 +130,6 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d("Activity", "Base onOptionsItemSelected");
@@ -144,7 +137,6 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -162,37 +154,26 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
         Log.d("Activity", "Base onNavigationItemSelected");
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         if(id == R.id.nav_home){
             Log.d("Activity", "Going to main activity");
             Intent intent = new Intent(this, MainActivity.class);
-           // intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-          //  intent.putExtra("fragment", 123);
             startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.nav_products || id == R.id.nav_services || id==R.id.nav_cart) {
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("fragment", id);
             startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-        } else if(id == R.id.nav_sell_service || id == R.id.nav_sell_product){
+        } else if(id == R.id.nav_sell_service || id == R.id.nav_sell_product) {
             Log.d("Activity", "Base Sell product or service");
             Intent intent = new Intent(this, SellNewActivity.class);
             intent.putExtra("fragment", id);
             startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
         } else if(id==R.id.nav_offered_by_me) {
             Intent intent = new Intent(this, OfferedByMeActivity.class);
             startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
         }else if(id==R.id.nav_my_orders){
             Intent intent = new Intent(this, MyOrderActivity.class);
             startActivity(intent);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
         }else if(id==R.id.nav_account){
 
         }else if(id==R.id.nav_password){
@@ -201,6 +182,8 @@ public class BaseMenuActivitiy extends AppCompatActivity  implements  Navigation
 
         }
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

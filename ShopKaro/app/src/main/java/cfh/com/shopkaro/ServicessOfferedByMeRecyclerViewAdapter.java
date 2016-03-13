@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cfh.com.shopkaro.dummy.Product;
 import cfh.com.shopkaro.dummy.Service;
 
 /**
@@ -25,7 +24,7 @@ public class ServicessOfferedByMeRecyclerViewAdapter extends RecyclerView.Adapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_offeredbyme_serviceitem, parent, false);
+                .inflate(R.layout.fragment_offeredbyme_services_item, parent, false);
         return new ViewHolder(view);
     }
 

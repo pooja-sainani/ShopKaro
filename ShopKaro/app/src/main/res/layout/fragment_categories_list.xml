@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="cfh.com.shopkaro.MyOrderService"
-    android:divider="#0085ff"
-    android:dividerHeight="4dp"
+    android:name="cfh.com.shopkaro.ProductsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:layout_marginTop="60dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="cfh.com.shopkaro.MyOrderService"
-    tools:listitem="@layout/fragment_orderserviceitem" />
+    tools:context=".CategoriesFragment"
+    tools:listitem="@layout/fragment_categories_item" />

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cfh.com.shopkaro.MyOrderProduct.OnListFragmentInteractionListener;
+import cfh.com.shopkaro.MyOrderProductsFragment.OnListFragmentInteractionListener;
 import cfh.com.shopkaro.dummy.OrderProductContent.DummyItem;
 
 /**
@@ -16,12 +16,12 @@ import cfh.com.shopkaro.dummy.OrderProductContent.DummyItem;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyOrderProductItemRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderProductItemRecyclerViewAdapter.ViewHolder> {
+public class MyOrderProductsRecyclerViewAdapter extends RecyclerView.Adapter<MyOrderProductsRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyOrderProductItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyOrderProductsRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -29,7 +29,7 @@ public class MyOrderProductItemRecyclerViewAdapter extends RecyclerView.Adapter<
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_orderproductitem, parent, false);
+                .inflate(R.layout.fragment_myorder_products_item, parent, false);
         return new ViewHolder(view);
     }
 

@@ -60,7 +60,7 @@ public class ServicesOfferedByMeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         new GetServicesOfferedByMeTask().execute();
-        View view = inflater.inflate(R.layout.fragment_offeredbyme_serviceslist, container, false);
+        View view = inflater.inflate(R.layout.fragment_offeredbyme_services_list, container, false);
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

@@ -38,7 +38,7 @@ import cfh.com.shopkaro.dummy.OrderServiceContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class MyOrderService extends Fragment {
+public class MyOrderServicesFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -48,13 +48,13 @@ public class MyOrderService extends Fragment {
     private ProgressDialog pDialog;
     private RecyclerView recyclerView;
 
-    public MyOrderService() {
+    public MyOrderServicesFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static MyOrderService newInstance(int columnCount) {
-        MyOrderService fragment = new MyOrderService();
+    public static MyOrderServicesFragment newInstance(int columnCount) {
+        MyOrderServicesFragment fragment = new MyOrderServicesFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -75,7 +75,7 @@ public class MyOrderService extends Fragment {
                              Bundle savedInstanceState) {
         OrderServiceContent.ITEMS.clear();
         new OrderServiceTask().execute();
-        View view = inflater.inflate(R.layout.fragment_orderserviceitem_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_myorder_services_list, container, false);
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             recyclerView = (RecyclerView) view;
@@ -176,7 +176,7 @@ public class MyOrderService extends Fragment {
                     OrderServiceContent.DummyItem item= new OrderServiceContent.DummyItem(jobj.getString("Name"),jobj.getString("SellerName")+" "+jobj.getString("SellerContact"),jobj.getString("Details"),jobj.getString("SellerPlace")+" , "+jobj.getString("SellerCity"));
                     OrderServiceContent.ITEMS.add(item);
                 }
-                recyclerView.setAdapter(new MyOrderServiceItemRecyclerViewAdapter(OrderServiceContent.ITEMS, mListener));
+                recyclerView.setAdapter(new MyOrderServicesRecyclerViewAdapter(OrderServiceContent.ITEMS, mListener));
             } catch (JSONException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

@@ -22,7 +22,7 @@
             app:layoutManager="LinearLayoutManager"
             android:name="cfh.com.shopkaro.MyCartFragment"
             tools:context=".MainActivity"
-            tools:listitem="@layout/fragment_list_one" />
+            tools:listitem="@layout/fragment_mycart_item" />
     </RelativeLayout>
 
     <LinearLayout

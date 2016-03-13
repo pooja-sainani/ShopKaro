@@ -17,20 +17,20 @@ import cfh.com.shopkaro.dummy.CartContent;
  * Created by Pooja on 2/27/2016.
  */
 
-public class MyCartFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MyCartFragmentRecyclerViewAdapter.ViewHolder> {
+public class MyCartRecyclerViewAdapter extends RecyclerView.Adapter<MyCartRecyclerViewAdapter.ViewHolder> {
 
     private final List<CartContent.CartItem> mValues;
     private final MyCartFragment.OnListFragmentInteractionListener mListener;
 
 
-    public MyCartFragmentRecyclerViewAdapter(List<CartContent.CartItem> items, MyCartFragment.OnListFragmentInteractionListener listener) {
+    public MyCartRecyclerViewAdapter(List<CartContent.CartItem> items, MyCartFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_list_one, parent, false);
+                .inflate(R.layout.fragment_mycart_item, parent, false);
         return new ViewHolder(view);
     }
 
