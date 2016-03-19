@@ -108,6 +108,8 @@ namespace APIShopKaro.Services
                 if (userReview.RATING == null && string.IsNullOrEmpty(userReview.COMMENTS))
                     return Guid.Empty;
 
+                if (!userReview.ID.HasValue || userReview.ID.Value == Guid.Empty)
+                    userReview.ID = Guid.NewGuid();
                 userReview.REVIEWDATE = DateTime.Now;
 
                 using (APIShopKaro.Models.apsteamCFHEntities db = new APIShopKaro.Models.apsteamCFHEntities())
