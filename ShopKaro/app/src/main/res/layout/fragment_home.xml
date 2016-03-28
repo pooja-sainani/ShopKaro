@@ -1,0 +1,72 @@
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="cfh.com.shopkaro.HomeFragment">-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="?actionBarSize"
+    android:paddingLeft="@dimen/padding_side"
+    android:paddingRight="@dimen/padding_side"
+    android:paddingBottom="@dimen/padding_medium"
+    android:paddingTop="@dimen/padding_medium"
+    android:gravity="center_vertical">
+
+    <RelativeLayout
+        android:id="@+id/pager_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:visibility="gone">
+
+        <!--<ProgressBar-->
+            <!--android:id="@+id/progressBar"-->
+            <!--style="?android:attr/progressBarStyleInverse"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:progressDrawable="@drawable/customprogress"-->
+            <!--android:visibility="visible" />-->
+
+        <!--<include-->
+            <!--android:id="@+id/placeholder_item"-->
+            <!--layout="@layout/carousal_pager_item"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true" />-->
+
+        <cfh.com.shopkaro.views.ViewPagerCustomDuration
+            android:id="@+id/fragment_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+        <!--<com.zomato.ui.android.TextViews.ZTextView-->
+        <!--android:id="@+id/recos_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignTop="@id/home_fragment_pager"-->
+        <!--android:layout_marginLeft="@dimen/padding_side"-->
+        <!--android:layout_marginTop="@dimen/padding_medium"-->
+        <!--android:text="@string/recommended_camelcase"-->
+        <!--zomato_ui:ztextview_custom_text_color="@color/color_black"-->
+        <!--zomato_ui:ztextview_type="WEEK_BADGE"-->
+        <!--zomato_ui:ztextview_badge_color="@color/color_dark_yellow"-->
+        <!--android:visibility="gone" />-->
+
+        <LinearLayout
+            android:id="@+id/dots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/fragment_pager"
+            android:layout_marginBottom="@dimen/padding_medium"
+            android:layout_marginLeft="@dimen/padding_side"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </RelativeLayout>
+
+</LinearLayout>
+<!--</FrameLayout>-->
