@@ -106,12 +106,36 @@
                 android:hint="Threshold quantity"/>
 
             <Button
+                android:id="@+id/buttonPreview"
+                android:layout_width="120dip"
+                android:layout_height="wrap_content"
+                android:text="@string/preview_button_text" />
+
+            <Button
+                android:id="@+id/buttonUpload"
+                android:layout_width="100dip"
+                android:layout_height="wrap_content"
+                android:text="@string/upload_button_text" />
+
+            <Button
                 android:id="@+id/add_product_button"
                 android:text="@string/add_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-
         </LinearLayout>
+
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/progress" >
+    </ProgressBar>
+
 </LinearLayout>

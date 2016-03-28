@@ -12,7 +12,13 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,6 +27,8 @@ android {
     }
     packagingOptions {
         exclude 'LICENSE.txt'
+        exclude "META-INF/MSFTSIG.SF"
+        exclude "META-INF/MSFTSIG.RSA"
     }
     // Resolve dependency differences between app and tests
     configurations.all {
@@ -30,19 +38,6 @@ android {
 repositories { mavenCentral() }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-
-    //for facebook integration
-
-    // Dependency for Google Sign-In
-    //   compile 'com.google.android.gms:play-services:8.4.0'
-
-// UiAutomatorTesting
-    androidTestCompile 'com.android.support.test:runner:0.2'
-    androidTestCompile 'com.android.support.test:rules:0.2'
-    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.0'
-    androidTestCompile 'com.android.support:support-annotations:23.0.1'
-
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
@@ -50,4 +45,8 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.android.support:support-v4:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.microsoft.azure:azure-mobile-services-android-sdk:2.0.3'
+    compile (group: 'com.microsoft.azure', name: 'azure-notifications-handler', version: '1.0.1', ext: 'jar')
+    compile 'com.microsoft.azure.android:azure-storage-android:0.6.0@aar'
 }

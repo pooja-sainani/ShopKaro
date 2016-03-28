@@ -20,6 +20,7 @@ public class Product {
     public int QUANTITYSOLD;
     public int QUANTITYAVAILABLE;
     public double AVGRATING;
+    public String IMAGEURL;
 
     public  Product(){
 

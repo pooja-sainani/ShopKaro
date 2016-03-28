@@ -1,5 +1,6 @@
 package cfh.com.shopkaro;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import org.apache.http.HttpResponse;
@@ -41,6 +43,14 @@ public class SellProductFragment extends Fragment{
 
     private View view;
 
+    private String photoID;
+
+    ProgressBar bar;
+
+    private Button addServiceButton;
+    private Button takePictureButton;
+    private Button uploadPictureButton;
+
     public SellProductFragment(){
 
     }
@@ -64,41 +74,75 @@ public class SellProductFragment extends Fragment{
                 .createFromResource(this.getActivity(), R.array.product_categories, android.R.layout.simple_spinner_item);
         staticSpinner.setAdapter(staticAdapter);
 
-        final Button addServiceButton = (Button) view.findViewById(R.id.add_product_button);
-        addServiceButton.setOnClickListener(new View.OnClickListener(){
+        bar = (ProgressBar) view.findViewById(R.id.progressBar);
+
+        addServiceButton = (Button) view.findViewById(R.id.add_product_button);
+        addServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Product product = new Product();
-                String temp = ((EditText)view.findViewById(R.id.product_name)).getText().toString();
-                if(temp != null)    product.NAME = temp;
+                String temp = ((EditText) view.findViewById(R.id.product_name)).getText().toString();
+                if (temp != null) product.NAME = temp;
                 Spinner spinner = (Spinner) view.findViewById(R.id.static_product_category_spinner);
                 int selectedCategoryPosition = spinner.getSelectedItemPosition();
                 product.CATEGORYID = productCategoryIds.get(selectedCategoryPosition);
-                temp = ((EditText)view.findViewById(R.id.product_price)).getText().toString();
-                Float tempf =  0.0f;
-                if(!temp.isEmpty())    tempf = Float.parseFloat(temp);
-                if(tempf != 0.0f)  product.PRICE = tempf;
-                temp = ((EditText)view.findViewById(R.id.product_details)).getText().toString();
-                if(temp != null)    product.DETAILS = temp;
-                temp = ((EditText)view.findViewById(R.id.product_tag1)).getText().toString();
-                if(temp != null)   product.TAG1 = temp;
-                temp = ((EditText)view.findViewById(R.id.product_tag2)).getText().toString();
-                if(temp != null)   product.TAG2 = temp;
-                temp = ((EditText)view.findViewById(R.id.product_tag3)).getText().toString();
-                if(temp != null)   product.TAG3 = temp;
+                temp = ((EditText) view.findViewById(R.id.product_price)).getText().toString();
+                Float tempf = 0.0f;
+                if (!temp.isEmpty()) tempf = Float.parseFloat(temp);
+                if (tempf != 0.0f) product.PRICE = tempf;
+                temp = ((EditText) view.findViewById(R.id.product_details)).getText().toString();
+                if (temp != null) product.DETAILS = temp;
+                temp = ((EditText) view.findViewById(R.id.product_tag1)).getText().toString();
+                if (temp != null) product.TAG1 = temp;
+                temp = ((EditText) view.findViewById(R.id.product_tag2)).getText().toString();
+                if (temp != null) product.TAG2 = temp;
+                temp = ((EditText) view.findViewById(R.id.product_tag3)).getText().toString();
+                if (temp != null) product.TAG3 = temp;
                 Integer tempi = 0;
                 temp = ((EditText) view.findViewById(R.id.product_quantiy_threshold)).getText().toString();
                 tempi = Integer.parseInt(temp);
-                if(tempi != 0)   product.THRESHOLDQUANTITY = tempi;
+                if (tempi != 0) product.THRESHOLDQUANTITY = tempi;
+                temp = ((EditText) view.findViewById(R.id.product_quantiy_available)).getText().toString();
+                tempi = Integer.parseInt(temp);
+                if (tempi != 0) product.QUANTITYAVAILABLE = tempi;
+                if(photoID != null)
+                    product.IMAGEURL = photoID;
 
                 new addNewProductPostTask(product).execute();
             }
         });
+
+        takePictureButton = (Button) view.findViewById(R.id.buttonPreview);
+        takePictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture(v);
+            }
+        });
+        uploadPictureButton = (Button) view.findViewById(R.id.buttonUpload);
+        uploadPictureButton.setEnabled(false);
+        uploadPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadPhoto(v);
+            }
+        });
+
         return view;
     }
 
+    public void takePicture(View view) {
+        Log.e("Method fragment", "takePicture");
+        ((SellNewActivity)getActivity()).takePicture(view);
+    }
 
-
+    public void uploadPhoto(View view) {
+        addServiceButton.setEnabled(false);
+        takePictureButton.setEnabled(false);
+        uploadPictureButton.setEnabled(false);
+        Log.e("Method fragment", "uploadPhoto");
+        photoID =  ((SellNewActivity) getActivity()).uploadPhoto(view);
+    }
 
     private class addNewProductPostTask extends AsyncTask<String, Integer, String>{
 
@@ -119,7 +163,7 @@ public class SellProductFragment extends Fragment{
             try{
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost("http://shopkaroapi.azurewebsites.net/api/Products/AddNewProduct");
-                SharedPreferences sp = getContext().getSharedPreferences("LoginSaved", Context.MODE_PRIVATE);
+                SharedPreferences sp = getActivity().getSharedPreferences("LoginSaved", Context.MODE_PRIVATE);
                 String sellerid = sp.getString("userid", null);
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("NAME", prod.NAME));
@@ -130,7 +174,9 @@ public class SellProductFragment extends Fragment{
                 nameValuePairs.add(new BasicNameValuePair("TAG2", prod.TAG2));
                 nameValuePairs.add(new BasicNameValuePair("TAG3", prod.TAG3));
                 nameValuePairs.add(new BasicNameValuePair("SELLERID", sellerid));
-                nameValuePairs.add(new BasicNameValuePair("THRESHOLDQUANTITY ", ""+prod.THRESHOLDQUANTITY));
+                nameValuePairs.add(new BasicNameValuePair("QUANTITYAVAILABLE ", Integer.toString(prod.QUANTITYAVAILABLE)));
+                nameValuePairs.add(new BasicNameValuePair("THRESHOLDQUANTITY ", Integer.toString(prod.THRESHOLDQUANTITY)));
+                nameValuePairs.add(new BasicNameValuePair("IMAGEURL", prod.IMAGEURL));
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 Log.e("Lothre3", ""+prod.THRESHOLDQUANTITY);
                 Log.e("Log3", "here3");
